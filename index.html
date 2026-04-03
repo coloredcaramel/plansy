@@ -13,7 +13,10 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
   --red:#E24B4A;--r-pill:999px;--r-sm:10px;--r:14px;
 }
 .app{display:flex;height:100vh}
-.sidebar{width:270px;min-width:270px;background:var(--bg);border-right:1.5px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.sidebar{width:var(--sb-w,270px);min-width:180px;max-width:520px;background:var(--bg);border-right:1.5px solid var(--border);display:flex;flex-direction:column;overflow:hidden;position:relative}
+.resizer{position:absolute;right:-4px;top:0;bottom:0;width:8px;cursor:col-resize;z-index:50;display:flex;align-items:center;justify-content:center}
+.resizer::after{content:'';display:block;width:3px;height:32px;border-radius:2px;background:var(--border2);transition:background .15s}
+.resizer:hover::after,.resizer.dragging::after{background:var(--p-mid)}
 .sb-brand{padding:12px 14px 10px;display:flex;align-items:center;gap:8px;border-bottom:1.5px solid var(--border)}
 .brand-icon{width:44px;height:44px;border-radius:12px;background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .brand-name{font-size:14px;font-weight:500;color:var(--txt)}
@@ -256,6 +259,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
       <div class="brand-icon"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/cat-salem.png" style="width:44px;height:44px;object-fit:contain" onerror="this.style.display='none';this.parentElement.textContent='🐱'"/></div>
       <div><div class="brand-name">Plansy ✨</div><div class="brand-sub" id="brand-date">Fri, Apr 3</div></div>
     </div>
+    <div class="resizer" id="resizer"></div>
     <div class="sb-top">
       <div class="ws-row">
         <button class="ws-btn" id="tab-all" onclick="setWS('all')">All</button>
@@ -536,7 +540,7 @@ function renderSidebar(){
         <span class="day-chevron" id="chev-${di}">${open?'▲':'▼'}</span>
       </div>
       <div id="dbody-${di}" style="display:${open?'block':'none'}">
-        <div class="day-bucket-body">`;
+        <div class="day-bucket-body" data-di="${di}">`;
     if(dt.length){
       ['high','med','low','todo'].forEach(g=>{
         const gt=dt.filter(t=>t.pri===g);if(!gt.length)return;
@@ -629,12 +633,38 @@ function toggleBucket(di){
 function toggleDump(){dumpOpen=!dumpOpen;renderSidebar();}
 
 function attachTaskDrag(){
+  // task-to-task reorder
   document.querySelectorAll('.task').forEach(el=>{
     el.addEventListener('dragstart',e=>{taskDragId=+el.dataset.id;e.dataTransfer.setData('text/plain',String(taskDragId));setTimeout(()=>el.classList.add('dragging'),0);});
     el.addEventListener('dragend',()=>{el.classList.remove('dragging');document.querySelectorAll('.task.drag-over').forEach(x=>x.classList.remove('drag-over'));});
     el.addEventListener('dragover',e=>{e.preventDefault();document.querySelectorAll('.task.drag-over').forEach(x=>x.classList.remove('drag-over'));if(+el.dataset.id!==taskDragId)el.classList.add('drag-over');});
     el.addEventListener('drop',e=>{e.preventDefault();const si=tasks.findIndex(x=>x.id===taskDragId),di=tasks.findIndex(x=>x.id===+el.dataset.id);if(si>=0&&di>=0&&si!==di){const[m]=tasks.splice(si,1);tasks.splice(di,0,m);}taskDragId=null;renderSidebar();});
   });
+  // day-bucket drop zones
+  document.querySelectorAll('.day-bucket-body').forEach(zone=>{
+    const di=+zone.closest('[data-di]')?.dataset.di;
+    if(isNaN(di))return;
+    zone.addEventListener('dragover',e=>{e.preventDefault();zone.style.background='var(--p-bg)';});
+    zone.addEventListener('dragleave',()=>{zone.style.background='';});
+    zone.addEventListener('drop',e=>{
+      e.preventDefault();zone.style.background='';
+      const id=taskDragId||+e.dataTransfer.getData('text/plain');
+      const t=tasks.find(x=>x.id===id);if(t){t.dayAssign=di;}
+      taskDragId=null;renderSidebar();if(curView==='week')renderWeeklyView();
+    });
+  });
+  // unscheduled drop zone
+  const uzone=document.querySelector('.unsched-section');
+  if(uzone){
+    uzone.addEventListener('dragover',e=>{e.preventDefault();uzone.style.background='var(--p-bg)';});
+    uzone.addEventListener('dragleave',()=>{uzone.style.background='';});
+    uzone.addEventListener('drop',e=>{
+      e.preventDefault();uzone.style.background='';
+      const id=taskDragId||+e.dataTransfer.getData('text/plain');
+      const t=tasks.find(x=>x.id===id);if(t){t.dayAssign=null;}
+      taskDragId=null;renderSidebar();if(curView==='week')renderWeeklyView();
+    });
+  }
 }
 
 function toggleDone(id){const t=tasks.find(x=>x.id===id);if(t){t.done=!t.done;if(t.done)t.pri='done';}renderSidebar();if(curView==='week')renderWeeklyView();}
@@ -946,7 +976,8 @@ function renderFocusView(){
       </div>
       ${focusSteps.length?`<div class="focus-progress"><div class="focus-progress-fill" style="width:${pct}%"></div></div>`:''}
       <div class="focus-section-label">Checklist ${focusSteps.length?`<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--txt3)">${done}/${focusSteps.length}</span>`:''}</div>
-      ${focusSteps.map(s=>`<div class="focus-step-row">
+      ${focusSteps.map(s=>`<div class="focus-step-row" draggable="true" data-sid="${s.id}">
+        <div style="cursor:grab;color:var(--txt3);font-size:11px;padding:0 4px 0 0;flex-shrink:0">⠿</div>
         <div class="focus-chk${s.done?' done':''}" onclick="toggleStep(${s.id})"></div>
         <span class="focus-step-text${s.done?' done':''}">${s.text}</span>
         <button class="focus-step-del" onclick="delStep(${s.id})">✕</button>
@@ -969,21 +1000,73 @@ function pinFocus(id){
   const t=tasks.find(x=>x.id===id);
   if(t&&t.subs&&t.subs.length&&!focusSteps.length)
     focusSteps=t.subs.map(s=>({id:nid++,text:s.name,done:s.done}));
-  renderFocusView();
+  renderFocusView();attachFocusDrag();
 }
 function unpinFocus(){focusTaskId=null;focusSteps=[];focusNotes='';focusPickMode=false;renderFocusView();}
 function addStep(){
   const inp=document.getElementById('fsi');if(!inp)return;
   const text=inp.value.trim();if(!text)return;
-  focusSteps.push({id:nid++,text,done:false});renderFocusView();
+  focusSteps.push({id:nid++,text,done:false});renderFocusView();attachFocusDrag();
   setTimeout(()=>{const i=document.getElementById('fsi');if(i)i.focus();},30);
 }
-function toggleStep(id){const s=focusSteps.find(x=>x.id===id);if(s)s.done=!s.done;renderFocusView();}
-function delStep(id){focusSteps=focusSteps.filter(x=>x.id!==id);renderFocusView();}
+function toggleStep(id){const s=focusSteps.find(x=>x.id===id);if(s)s.done=!s.done;renderFocusView();attachFocusDrag();}
+function delStep(id){focusSteps=focusSteps.filter(x=>x.id!==id);renderFocusView();attachFocusDrag();}
+
+let focusDragId=null;
+function attachFocusDrag(){
+  document.querySelectorAll('.focus-step-row').forEach(el=>{
+    el.addEventListener('dragstart',e=>{
+      focusDragId=+el.dataset.sid;
+      e.dataTransfer.setData('text/plain',String(focusDragId));
+      setTimeout(()=>el.style.opacity='.3',0);
+    });
+    el.addEventListener('dragend',()=>{el.style.opacity='';});
+    el.addEventListener('dragover',e=>{
+      e.preventDefault();
+      document.querySelectorAll('.focus-step-row').forEach(x=>x.style.outline='');
+      if(+el.dataset.sid!==focusDragId)el.style.outline='2px dashed var(--p-mid)';
+    });
+    el.addEventListener('dragleave',()=>el.style.outline='');
+    el.addEventListener('drop',e=>{
+      e.preventDefault();
+      el.style.outline='';
+      const fromId=focusDragId||+e.dataTransfer.getData('text/plain');
+      const toId=+el.dataset.sid;
+      if(fromId===toId)return;
+      const fi=focusSteps.findIndex(x=>x.id===fromId),ti=focusSteps.findIndex(x=>x.id===toId);
+      if(fi>=0&&ti>=0){const[m]=focusSteps.splice(fi,1);focusSteps.splice(ti,0,m);}
+      focusDragId=null;renderFocusView();attachFocusDrag();
+    });
+  });
+}
 function markFocusDone(){
   const t=tasks.find(x=>x.id===focusTaskId);if(t){t.done=true;t.pri='done';}
   unpinFocus();renderSidebar();
 }
+
+// ── SIDEBAR RESIZE ──
+(function(){
+  const resizer=document.getElementById('resizer');
+  const sidebar=resizer.closest('.sidebar');
+  let startX=0,startW=0,dragging=false;
+  resizer.addEventListener('mousedown',e=>{
+    dragging=true;startX=e.clientX;startW=sidebar.offsetWidth;
+    resizer.classList.add('dragging');
+    document.body.style.cursor='col-resize';
+    document.body.style.userSelect='none';
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!dragging)return;
+    const w=Math.min(520,Math.max(180,startW+(e.clientX-startX)));
+    sidebar.style.width=w+'px';
+  });
+  document.addEventListener('mouseup',()=>{
+    if(!dragging)return;
+    dragging=false;resizer.classList.remove('dragging');
+    document.body.style.cursor='';document.body.style.userSelect='';
+  });
+})();
 
 // ── SUPABASE SYNC ──
 const SB_URL='https://aryotcmjkjxhfqvsoxej.supabase.co';
