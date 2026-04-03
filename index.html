@@ -780,8 +780,8 @@ function renderCal(){
   const totalH=(22-H_START)*HH+HH/2;
   document.getElementById('dscroll').innerHTML=dates.map((d,di)=>{
     const ev=calEvents.filter(e=>!e.allday&&e.day===di&&(curWS==='all'||e.ws===curWS));
-    const lines=Array.from({length:22-H_START+1},(_,i)=>{
-      const top=i*HH-HH/2;
+    const lines=Array.from({length:22-H_START+2},(_,i)=>{
+      const top=i*HH-HH;
       return `<div class="hline" style="top:${top}px"></div><div class="hline half" style="top:${top+HH/2}px"></div>`;
     }).join('');
     const evs=ev.map(e=>{
