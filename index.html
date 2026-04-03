@@ -13,11 +13,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
   --red:#E24B4A;--r-pill:999px;--r-sm:10px;--r:14px;
 }
 .app{display:flex;height:100vh}
-/* SIDEBAR */
 .sidebar{width:270px;min-width:270px;background:var(--bg);border-right:1.5px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
 .sb-brand{padding:12px 14px 10px;display:flex;align-items:center;gap:8px;border-bottom:1.5px solid var(--border)}
-.brand-icon{width:32px;height:32px;border-radius:12px;background:var(--p-mid);display:flex;align-items:center;justify-content:center;font-size:18px}
-.brand-icon svg{width:14px;height:14px;fill:#fff}
+.brand-icon{width:36px;height:36px;border-radius:12px;background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .brand-name{font-size:14px;font-weight:500;color:var(--txt)}
 .brand-sub{font-size:10px;color:var(--txt3);margin-top:1px}
 .sb-top{padding:10px 12px 8px;border-bottom:1.5px solid var(--border)}
@@ -31,7 +29,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .sb-scroll{flex:1;overflow-y:auto;padding:0 0 16px}
 .sb-scroll::-webkit-scrollbar{width:3px}
 .sb-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-/* Day buckets */
 .day-bucket{border-bottom:1px solid var(--border)}
 .day-bucket-head{display:flex;align-items:center;gap:7px;padding:8px 12px 6px;cursor:pointer;user-select:none}
 .day-bucket-head:hover{background:var(--bg3)}
@@ -45,7 +42,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .pri-group{margin-bottom:2px}
 .pri-group-label{display:flex;align-items:center;gap:4px;padding:2px 4px;font-size:9.5px;font-weight:500;color:var(--txt2);text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
 .pri-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-/* Tasks */
 .task{display:flex;align-items:flex-start;gap:6px;padding:4px 6px;border-radius:var(--r-sm);cursor:grab;font-size:12px;color:var(--txt);transition:background .1s;position:relative;margin:1px 0}
 .task:hover{background:var(--bg3)}
 .task:hover .task-acts{display:flex}
@@ -85,13 +81,11 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .add-plus{width:17px;height:17px;border-radius:50%;border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
 .add-row:hover .add-plus{border-color:var(--p-mid);border-style:solid}
 .divider{height:1px;background:var(--border);margin:4px 12px}
-/* Subtask inline input */
 .sub-input-row{display:flex;align-items:center;gap:4px;margin-top:3px;padding:1px 0}
 .sub-inline-input{flex:1;padding:3px 7px;font-size:11px;border:1.5px solid var(--p-soft);border-radius:var(--r-pill);background:var(--p-bg);color:var(--txt);outline:none;font-family:inherit}
 .sub-inline-input:focus{border-color:var(--p-mid)}
 .sub-inline-ok{padding:2px 7px;font-size:11px;border:1.5px solid var(--p-mid);border-radius:var(--r-pill);background:var(--p-mid);color:#fff;cursor:pointer;font-family:inherit;flex-shrink:0}
 .sub-inline-cancel{padding:2px 5px;font-size:11px;border:1px solid var(--border2);border-radius:var(--r-pill);background:transparent;color:var(--txt3);cursor:pointer;font-family:inherit;flex-shrink:0}
-/* Brain dump */
 .dump-row{display:flex;align-items:center;gap:6px;padding:3px 6px;border-radius:var(--r-sm);font-size:11.5px;color:var(--txt2);position:relative;margin:1px 0}
 .dump-row:hover{background:var(--bg3)}
 .dump-row:hover .dump-acts{display:flex}
@@ -102,7 +96,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .dump-input:focus{border-color:var(--p-mid);background:var(--bg)}
 .dump-add-btn{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--p-soft);background:var(--p-bg);color:var(--p-dark);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .dump-add-btn:hover{background:var(--p-soft)}
-/* MODALS */
 .overlay{display:none;position:absolute;inset:0;background:rgba(45,42,64,.28);z-index:200;align-items:center;justify-content:center}
 .overlay.open{display:flex}
 .modal{background:var(--bg);border-radius:16px;padding:22px;width:310px;border:1.5px solid var(--border);max-height:92vh;overflow-y:auto}
@@ -126,7 +119,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .btn-cancel{padding:7px 15px;font-size:12px;border:1.5px solid var(--border2);border-radius:var(--r-pill);cursor:pointer;background:transparent;color:var(--txt2);font-family:inherit}
 .btn-save{padding:7px 15px;font-size:12px;border:1.5px solid var(--p-mid);border-radius:var(--r-pill);cursor:pointer;background:var(--p-mid);color:#fff;font-weight:500;font-family:inherit}
 .btn-save:hover{background:var(--p-dark)}
-/* MAIN */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;background:var(--bg2)}
 .cal-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1.5px solid var(--border);background:var(--bg);flex-shrink:0}
 .cal-nav{display:flex;align-items:center;gap:8px}
@@ -139,7 +131,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .vtab.active{background:var(--bg);color:var(--txt)}
 .legend{display:flex;gap:6px;align-items:center}
 .leg-item{display:flex;align-items:center;gap:3px;padding:3px 8px;border-radius:var(--r-pill);font-size:10px;font-weight:500}
-/* CALENDAR */
 .cal-body{flex:1;display:flex;overflow:hidden}
 .time-col{width:52px;flex-shrink:0;border-right:1.5px solid var(--border);display:flex;flex-direction:column;background:var(--bg)}
 .time-col-head{height:50px;flex-shrink:0;border-bottom:1.5px solid var(--border)}
@@ -180,7 +171,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .now-dot{position:absolute;left:-4px;top:-4px;width:9px;height:9px;border-radius:50%;background:#D4537E}
 .ghost{position:absolute;left:3px;right:3px;border-radius:var(--r-sm);background:var(--p-bg);border:1.5px dashed var(--p-mid);pointer-events:none;z-index:4;opacity:.8}
 .time-hint{position:absolute;left:4px;font-size:9px;color:var(--p-dark);background:var(--p-bg);padding:1px 5px;border-radius:4px;pointer-events:none;z-index:5;white-space:nowrap;border:1px solid var(--p-soft)}
-/* WEEKLY VIEW */
 .wov-wrap{flex:1;overflow-y:auto;padding:16px 18px}
 .wov-wrap::-webkit-scrollbar{width:3px}
 .wov-stats{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
@@ -218,7 +208,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .unsched-pill:hover{border-color:var(--border2)}
 .unsched-pill.dragging{opacity:.3}
 .pri-pip{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-/* FOCUS VIEW */
 .focus-wrap{flex:1;overflow-y:auto;padding:20px 24px}
 .focus-empty{text-align:center;padding:60px 24px;color:var(--txt3)}
 .focus-empty-icon{font-size:36px;margin-bottom:12px}
@@ -264,9 +253,8 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 <div class="app">
   <div class="sidebar">
     <div class="sb-brand">
-      <div class="brand-icon" style="background:transparent;overflow:visible"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/cat-salem.png" style="width:40px;height:40px;object-fit:contain" onerror="this.parentElement.textContent='🐱'"/></div>
-      <div><div class="brand-name">Nina's planner</div><div class="brand-sub">Mon, Mar 30</div></div>
-      <div><div class="brand-name">Nina's planner</div><div class="brand-sub">Mon, Mar 30</div></div>
+      <div class="brand-icon"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/cat-salem.png" style="width:36px;height:36px;object-fit:contain" onerror="this.style.display='none';this.parentElement.textContent='🐱'"/></div>
+      <div><div class="brand-name">Plansy ✨</div><div class="brand-sub" id="brand-date">Mon, Mar 30</div></div>
     </div>
     <div class="sb-top">
       <div class="ws-row">
@@ -288,9 +276,15 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <div class="view-toggle">
-          <button class="vtab active" id="vtab-cal" onclick="switchView('cal')">🍪 Calendar</button>
-          <button class="vtab" id="vtab-week" onclick="switchView('week')"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-purple-donut.png" style="width:16px;height:16px;object-fit:contain;vertical-align:middle"/> Weekly</button>
-          <button class="vtab" id="vtab-focus" onclick="switchView('focus')"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-cute-drink.png" style="width:16px;height:16px;object-fit:contain;vertical-align:middle"/> Focus</button>
+          <button class="vtab active" id="vtab-cal" onclick="switchView('cal')">
+            <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-cookie.png" style="width:16px;height:16px;object-fit:contain;vertical-align:middle" onerror="this.style.display='none'"/> Calendar
+          </button>
+          <button class="vtab" id="vtab-week" onclick="switchView('week')">
+            <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-purple-donut.png" style="width:16px;height:16px;object-fit:contain;vertical-align:middle" onerror="this.style.display='none'"/> Weekly
+          </button>
+          <button class="vtab" id="vtab-focus" onclick="switchView('focus')">
+            <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-cute-drink.png" style="width:16px;height:16px;object-fit:contain;vertical-align:middle" onerror="this.style.display='none'"/> Focus
+          </button>
         </div>
         <span id="cal-hint" style="font-size:10px;color:var(--txt3)">click · drag to add</span>
         <div class="legend" id="legend"></div>
@@ -408,14 +402,13 @@ const COLORS=[
 ];
 const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-const H_START=4, HH=54;
+// ── FIX 1: H_START=5 so 05:00 label aligns with first row ──
+const H_START=5, HH=54;
 
-// State
 let curWS='personal', wkOff=0, editTaskId=null, editEvId=null, nid=200;
 let repeatSel='none', evColorSel='purple', curView='cal';
 let dumpOpen=true, taskDragId=null, wovDragId=null;
 let isDragging=false, dragDayIdx=0, dragStartH=0, ghostEl=null, hintEl=null, dragCol=null;
-// Focus state
 let focusTaskId=null, focusSteps=[], focusNotes='', focusPickMode=false;
 
 let tasks=[
@@ -463,13 +456,14 @@ let calEvents=[
   {id:1016,ws:'cc',title:'Daily work on CC',day:6,allday:true,repeat:'daily',color:'coral'},
 ];
 
-// ── HELPERS ──
+// Use real local time (WET = UTC+0, WEST = UTC+1 in summer)
+const _TODAY=new Date();
 function getWeekDates(off){
-  const now=new Date(2026,2,30),dow=now.getDay();
+  const now=_TODAY,dow=now.getDay();
   const mon=new Date(now);mon.setDate(now.getDate()-(dow===0?6:dow-1)+off*7);
   return Array.from({length:7},(_,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);return d;});
 }
-function isToday(d){const n=new Date(2026,2,30);return d.getDate()===n.getDate()&&d.getMonth()===n.getMonth();}
+function isToday(d){return d.getDate()===_TODAY.getDate()&&d.getMonth()===_TODAY.getMonth()&&d.getFullYear()===_TODAY.getFullYear();}
 function snapH(h){return Math.round(h*4)/4;}
 function fmtH(h){const hh=Math.floor(h),mm=Math.round((h%1)*60);return `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;}
 function parseH(s){const[h,m]=s.split(':').map(Number);return h+m/60;}
@@ -479,7 +473,6 @@ function getWkNum(d){const j=new Date(d.getFullYear(),0,1);return Math.ceil(((d-
 function repeatIcon(r){return r==='daily'?'↻ daily':r==='weekly'?'↻ weekly':r==='monthly'?'↻ monthly':'';}
 function getColor(id){return COLORS.find(c=>c.id===id)||COLORS[0];}
 
-// ── WORKSPACE ──
 function setWS(w){
   curWS=w;
   ['all','personal','cc','sev'].forEach(x=>{
@@ -491,7 +484,6 @@ function setWS(w){
   else renderFocusView();
 }
 
-// ── VIEW SWITCHER ──
 function switchView(v){
   curView=v;
   ['cal','week','focus'].forEach(x=>{
@@ -506,16 +498,19 @@ function switchView(v){
   else renderFocusView();
 }
 
-// ── SIDEBAR ──
+// ── FIX 3+4: priority groups for all workspaces including CC ──
+// Sidebar render: use same pri group logic for all workspaces
 function renderSidebar(){
   const vis=tasks.filter(t=>curWS==='all'||t.ws===curWS);
   const dates=getWeekDates(wkOff);
   let html='';
-  // Unscheduled
   const unsched=vis.filter(t=>t.dayAssign==null&&!t.done);
   html+=`<div class="unsched-section">
     <div class="unsched-head">
-      <span class="unsched-label">🍬 Unscheduled <span style="background:var(--bg3);color:var(--txt2);padding:1px 6px;border-radius:999px;font-size:9px">${unsched.length}</span></span>
+      <span class="unsched-label">
+        <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-candy.png" style="width:14px;height:14px;object-fit:contain;vertical-align:middle" onerror="this.outerHTML='🍬'"/>
+        Unscheduled <span style="background:var(--bg3);color:var(--txt2);padding:1px 6px;border-radius:999px;font-size:9px">${unsched.length}</span>
+      </span>
       <button class="sec-add" onclick="openAddTask('todo')">+</button>
     </div>`;
   if(unsched.length){
@@ -529,7 +524,7 @@ function renderSidebar(){
     html+=`<div class="unsched-hint">No unscheduled tasks</div>`;
   }
   html+=`</div>`;
-  // Day buckets
+
   DAYS.forEach((day,di)=>{
     const dt=vis.filter(t=>t.dayAssign===di&&!t.done);
     const open=dt.length>0||isToday(dates[di]);
@@ -555,15 +550,17 @@ function renderSidebar(){
     html+=`<div class="add-row" style="margin:2px 0 0;padding:3px 2px" onclick="openAddTask('todo',${di})"><div class="add-plus" style="width:14px;height:14px;font-size:10px">+</div><span style="font-size:11px">add task</span></div>`;
     html+=`</div></div></div>`;
   });
-  // Done
+
   const done=vis.filter(t=>t.done);
   if(done.length){
     html+=`<div class="divider"></div><div class="unsched-section" style="border-bottom:none">
-      <div class="unsched-head"><span class="unsched-label"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:16px;height:16px;object-fit:contain;vertical-align:middle;margin-right:3px"/> Done <span style="background:var(--bg3);color:var(--txt2);padding:1px 6px;border-radius:999px;font-size:9px">${done.length}</span></span></div>`;
+      <div class="unsched-head"><span class="unsched-label">
+        <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:16px;height:16px;object-fit:contain;vertical-align:middle;margin-right:3px" onerror="this.outerHTML='💖'"/>
+        Done <span style="background:var(--bg3);color:var(--txt2);padding:1px 6px;border-radius:999px;font-size:9px">${done.length}</span>
+      </span></div>`;
     done.forEach(t=>{html+=taskRowHtml(t);});
     html+=`</div>`;
   }
-  // Dump
   html+=dumpHtml();
   html+=`<div class="add-row" onclick="openAddTask('todo')"><div class="add-plus">+</div><span>Add task</span></div>`;
   document.getElementById('sb-scroll').innerHTML=html;
@@ -602,7 +599,10 @@ function dumpHtml(){
   return `<div class="divider"></div>
   <div class="unsched-section" style="border-bottom:none">
     <div class="unsched-head" onclick="toggleDump()" style="cursor:pointer">
-      <span class="unsched-label">🗂 Brain dump <span style="background:#f4f1fc;color:#7a7590;padding:1px 6px;border-radius:999px;font-size:9px">${items.length}</span></span>
+      <span class="unsched-label">
+        <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-star.png" style="width:14px;height:14px;object-fit:contain;vertical-align:middle" onerror="this.outerHTML='🗂'"/>
+        Brain dump <span style="background:#f4f1fc;color:#7a7590;padding:1px 6px;border-radius:999px;font-size:9px">${items.length}</span>
+      </span>
       <span style="font-size:9px;color:var(--txt3)">${dumpOpen?'▲':'▼'}</span>
     </div>
     ${dumpOpen?`<div>
@@ -687,7 +687,6 @@ function saveTaskModal(){
   window._pd=null;closeTaskModal();renderSidebar();if(curView==='week')renderWeeklyView();
 }
 
-// Brain dump
 function addDump(){
   const inp=document.getElementById('dump-input');if(!inp)return;
   const text=inp.value.trim();if(!text)return;
@@ -708,7 +707,6 @@ function promoteDump(id){
   renderSidebar();
 }
 
-// ── COLOR / REPEAT ──
 function renderSwatches(sel){
   evColorSel=sel||'purple';
   document.getElementById('ev-colors').innerHTML=COLORS.map(c=>`<div class="swatch${c.id===evColorSel?' sel':''}" style="background:${c.dot}" title="${c.id}" onclick="pickColor('${c.id}')"></div>`).join('');
@@ -716,7 +714,6 @@ function renderSwatches(sel){
 function pickColor(id){evColorSel=id;renderSwatches(id);}
 function selRepeat(val){repeatSel=val;document.querySelectorAll('.rchip').forEach(c=>c.classList.toggle('sel',c.dataset.r===val));}
 
-// ── EVENT MODAL ──
 function populateDaySelect(sel){
   const dates=getWeekDates(wkOff);
   document.getElementById('ev-day').innerHTML=dates.map((d,i)=>`<option value="${i}">${DAYS[i]} ${d.getDate()}</option>`).join('');
@@ -760,11 +757,11 @@ function saveEvModal(){
   closeEvModal();renderCal();
 }
 
-// ── CALENDAR ──
 function renderLegend(){
   const show=curWS==='all'?Object.entries(WS):[[curWS,WS[curWS]]];
   document.getElementById('legend').innerHTML=show.map(([,v])=>`<div class="leg-item" style="background:${v.bg};color:${v.dark}"><div style="width:7px;height:7px;border-radius:50%;background:${v.mid}"></div>${v.label}</div>`).join('');
 }
+
 function renderCal(){
   const dates=getWeekDates(wkOff);
   const mon=dates[0],sun=dates[6];
@@ -778,11 +775,13 @@ function renderCal(){
       <div style="font-size:9px;color:var(--txt3);padding:1px 2px">+</div>
     </div>`;
   }).join('');
+
+  // ── FIX 2: const top=i*HH (no offset), with H_START=5 ──
   const totalH=(22-H_START)*HH+HH/2;
   document.getElementById('dscroll').innerHTML=dates.map((d,di)=>{
     const ev=calEvents.filter(e=>!e.allday&&e.day===di&&(curWS==='all'||e.ws===curWS));
     const lines=Array.from({length:22-H_START+1},(_,i)=>{
-      const top=i*HH+HH/2;
+      const top=i*HH;
       return `<div class="hline" style="top:${top}px"></div><div class="hline half" style="top:${top+HH/2}px"></div>`;
     }).join('');
     const evs=ev.map(e=>{
@@ -794,23 +793,23 @@ function renderCal(){
         <button class="ev-del" onclick="event.stopPropagation();quickDelEvent(${e.id})">✕</button>
       </div>`;
     }).join('');
-    const now=wkOff===0&&isToday(d)?`<div class="now-line" style="top:${hourToPx(5.85)}px"><div class="now-dot"></div></div>`:'';
+    const nowH=_TODAY.getHours()+_TODAY.getMinutes()/60;
+    const now=wkOff===0&&isToday(d)?`<div class="now-line" style="top:${hourToPx(nowH)}px"><div class="now-dot"></div></div>`:'';
     return `<div class="dcol${isToday(d)?' today-col':''}" style="height:${totalH}px">${lines}${evs}${now}</div>`;
   }).join('');
   syncScroll();attachColEvents();
 }
+
 function openAddAlldayEvent(di){openAddEvent(di,null);document.getElementById('ev-dur').value='allday';}
 function quickDelEvent(id){calEvents=calEvents.filter(x=>x.id!==id);renderCal();}
 function syncScroll(){
   const ts=document.getElementById('tscroll'),ds=document.getElementById('dscroll');
   ts.onscroll=()=>ds.scrollTop=ts.scrollTop;
   ds.onscroll=()=>ts.scrollTop=ds.scrollTop;
-  setTimeout(()=>{const s=(6-H_START)*HH;ds.scrollTop=s;ts.scrollTop=s;},60);
+  setTimeout(()=>{const nowH=_TODAY.getHours()+_TODAY.getMinutes()/60;const s=Math.max(0,(nowH-1-H_START)*HH);ds.scrollTop=s;ts.scrollTop=s;},60);
 }
 function shiftWeek(d){wkOff+=d;renderSidebar();if(curView==='cal')renderCal();else if(curView==='week')renderWeeklyView();}
-function getWkNum(d){const j=new Date(d.getFullYear(),0,1);return Math.ceil(((d-j)/86400000+j.getDay()+1)/7);}
 
-// Cal drag-to-create
 function attachColEvents(){
   document.querySelectorAll('.dcol').forEach((col,di)=>{
     col.addEventListener('mousedown',e=>{
@@ -852,7 +851,6 @@ function onCalUp(e){
   document.getElementById('ev-dur').value=kd.includes(String(dur))?String(dur):'1';
 }
 
-// ── WEEKLY VIEW ──
 function renderWeeklyView(){
   const dates=getWeekDates(wkOff);
   const all=tasks.filter(t=>curWS==='all'||t.ws===curWS);
@@ -905,7 +903,6 @@ function wovDrop(e,di){
 function wovToggle(id){const t=tasks.find(x=>x.id===id);if(t){t.done=!t.done;if(t.done)t.pri='done';}renderWeeklyView();renderSidebar();}
 function wovUnassign(id){const t=tasks.find(x=>x.id===id);if(t)t.dayAssign=null;renderWeeklyView();renderSidebar();}
 
-// ── FOCUS VIEW ──
 function renderFocusView(){
   const el=document.getElementById('focus-view');if(!el)return;
   const pinned=focusTaskId!=null?tasks.find(x=>x.id===focusTaskId):null;
@@ -928,9 +925,11 @@ function renderFocusView(){
   }
   if(!pinned){
     el.innerHTML=`<div class="focus-empty">
-      <div class="focus-empty-icon">🍩</div>
+      <div class="focus-empty-icon"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-purple-donut.png" style="width:48px;height:48px;object-fit:contain" onerror="this.outerHTML='🍩'"/></div>
       <div class="focus-empty-text">Nothing in focus yet~<br>Pick a task to get started!</div>
-      <button class="focus-pick-btn" onclick="focusPickMode=true;renderFocusView()">🌸 Pick a task</button>
+      <button class="focus-pick-btn" onclick="focusPickMode=true;renderFocusView()">
+        <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:14px;height:14px;object-fit:contain;vertical-align:middle" onerror="this.outerHTML='🌸'"/> Pick a task
+      </button>
     </div>`;
     return;
   }
@@ -961,7 +960,9 @@ function renderFocusView(){
       <div class="focus-section-label">Notes</div>
       <textarea class="focus-notes" id="fni" placeholder="Jot anything down while you work…" oninput="focusNotes=this.value">${focusNotes}</textarea>
     </div>
-    <button class="focus-done-btn" onclick="markFocusDone()">🌸 Mark task done</button>`;
+    <button class="focus-done-btn" onclick="markFocusDone()">
+      <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:14px;height:14px;object-fit:contain;vertical-align:middle" onerror="this.outerHTML='🌸'"/> Mark task done
+    </button>`;
 }
 function pinFocus(id){
   focusTaskId=id;focusPickMode=false;
@@ -988,68 +989,37 @@ function markFocusDone(){
 const SB_URL='https://aryotcmjkjxhfqvsoxej.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeW90Y21qa2p4aGZxdnNveGVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NDY0NDcsImV4cCI6MjA5MDUyMjQ0N30.fOYv72EkmeioE-0wVPNo8KuDudbAZvxV7ONgeGCS8EY';
 const SB_HDR={'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'return=minimal'};
-
-async function sbGet(table){
-  const r=await fetch(`${SB_URL}/rest/v1/${table}?select=*`,{headers:SB_HDR});
-  return r.ok?await r.json():[];
-}
-async function sbUpsert(table,rows){
-  if(!rows.length)return;
-  await fetch(`${SB_URL}/rest/v1/${table}`,{method:'POST',headers:{...SB_HDR,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(rows)});
-}
-async function sbDelete(table,id){
-  await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`,{method:'DELETE',headers:SB_HDR});
-}
-async function sbClear(table){
-  await fetch(`${SB_URL}/rest/v1/${table}?id=gte.0`,{method:'DELETE',headers:SB_HDR});
-}
-
-// Save all data to Supabase
+async function sbGet(table){const r=await fetch(`${SB_URL}/rest/v1/${table}?select=*`,{headers:SB_HDR});return r.ok?await r.json():[];}
+async function sbUpsert(table,rows){if(!rows.length)return;await fetch(`${SB_URL}/rest/v1/${table}`,{method:'POST',headers:{...SB_HDR,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(rows)});}
+async function sbClear(table){await fetch(`${SB_URL}/rest/v1/${table}?id=gte.0`,{method:'DELETE',headers:SB_HDR});}
 let saveTimer=null;
-function scheduleSave(){
-  clearTimeout(saveTimer);
-  saveTimer=setTimeout(saveAll,800);
-}
+function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveAll,800);}
 async function saveAll(){
   try{
-    // tasks
     await sbClear('tasks');
-    if(tasks.length) await sbUpsert('tasks', tasks.map(t=>({id:t.id,ws:t.ws,pri:t.pri,name:t.name,done:t.done,subs:t.subs,ex:t.ex,day_assign:t.dayAssign??null})));
-    // events
+    if(tasks.length)await sbUpsert('tasks',tasks.map(t=>({id:t.id,ws:t.ws,pri:t.pri,name:t.name,done:t.done,subs:t.subs,ex:t.ex,day_assign:t.dayAssign??null})));
     await sbClear('cal_events');
-    if(calEvents.length) await sbUpsert('cal_events', calEvents.map(e=>({id:e.id,ws:e.ws,title:e.title,day:e.day,sh:e.sh??null,dur:e.dur??null,allday:e.allday,repeat:e.repeat,color:e.color})));
-    // dump
+    if(calEvents.length)await sbUpsert('cal_events',calEvents.map(e=>({id:e.id,ws:e.ws,title:e.title,day:e.day,sh:e.sh??null,dur:e.dur??null,allday:e.allday,repeat:e.repeat,color:e.color})));
     await sbClear('dump');
-    if(dump.length) await sbUpsert('dump', dump.map(d=>({id:d.id,ws:d.ws,text:d.text})));
+    if(dump.length)await sbUpsert('dump',dump.map(d=>({id:d.id,ws:d.ws,text:d.text})));
   }catch(e){console.warn('Save error',e);}
 }
-
-// Load all data from Supabase
 async function loadAll(){
   try{
-    const [t,e,d]=await Promise.all([sbGet('tasks'),sbGet('cal_events'),sbGet('dump')]);
-    if(t.length){
-      tasks=t.map(r=>({id:r.id,ws:r.ws,pri:r.pri,name:r.name,done:r.done,subs:r.subs||[],ex:r.ex||false,dayAssign:r.day_assign??null}));
-      nid=Math.max(nid,...tasks.map(x=>x.id+1));
-    }
-    if(e.length){
-      calEvents=e.map(r=>({id:r.id,ws:r.ws,title:r.title,day:r.day,sh:r.sh,dur:r.dur,allday:r.allday,repeat:r.repeat,color:r.color}));
-      nid=Math.max(nid,...calEvents.map(x=>x.id+1));
-    }
-    if(d.length){
-      dump=d.map(r=>({id:r.id,ws:r.ws,text:r.text}));
-      nid=Math.max(nid,...dump.map(x=>x.id+1));
-    }
+    const[t,e,d]=await Promise.all([sbGet('tasks'),sbGet('cal_events'),sbGet('dump')]);
+    if(t.length){tasks=t.map(r=>({id:r.id,ws:r.ws,pri:r.pri,name:r.name,done:r.done,subs:r.subs||[],ex:r.ex||false,dayAssign:r.day_assign??null}));nid=Math.max(nid,...tasks.map(x=>x.id+1));}
+    if(e.length){calEvents=e.map(r=>({id:r.id,ws:r.ws,title:r.title,day:r.day,sh:r.sh,dur:r.dur,allday:r.allday,repeat:r.repeat,color:r.color}));nid=Math.max(nid,...calEvents.map(x=>x.id+1));}
+    if(d.length){dump=d.map(r=>({id:r.id,ws:r.ws,text:r.text}));nid=Math.max(nid,...dump.map(x=>x.id+1));}
   }catch(e){console.warn('Load error',e);}
 }
-
-// Patch render functions to auto-save after every change
 const _rSB=renderSidebar;
 renderSidebar=function(){_rSB();scheduleSave();};
 const _rCal=renderCal;
 renderCal=function(){_rCal();scheduleSave();};
-
-// Show loading state then load
+      const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const dow2=_TODAY.getDay(),di2=dow2===0?6:dow2-1;
+      document.getElementById('brand-date').textContent=`${days[di2]}, ${months[_TODAY.getMonth()]} ${_TODAY.getDate()}`;
 document.getElementById('sb-scroll').innerHTML='<div style="padding:24px;text-align:center;color:var(--txt3);font-size:12px">Loading your data…</div>';
 loadAll().then(()=>setWS('personal'));
 </script>
