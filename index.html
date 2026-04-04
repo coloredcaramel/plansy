@@ -609,7 +609,7 @@ function renderPage(){
       <button class="wtool" onclick="fmt('formatBlock','h2')" title="Heading">H</button>
       <button class="wtool" onclick="fmt('formatBlock','p')" title="Paragraph">¶</button>
     </div>
-    <div class="whisper-editor" id="whisper-editor" contenteditable="true" data-placeholder="Start brewing your thoughts…" oninput="saveCurrentPage()">${p.content||''}</div>
+    <div class="whisper-editor" id="whisper-editor" contenteditable="true" data-placeholder="Start brewing your thoughts…" oninput="scheduleBrewSave()">${p.content||''}</div>
     <div class="whisper-meta">Last edited ${fmtDate(p.updated)}</div>
   </div>`;
   // focus editor
@@ -619,9 +619,12 @@ function renderPage(){
 function fmt(cmd,val){document.execCommand(cmd,false,val||null);document.getElementById('whisper-editor')?.focus();}
 
 function updatePageTitle(v){
-  const p=whisperPages.find(x=>x.id===activePageId);if(p){p.title=v||'Untitled';p.updated=Date.now();}
+  const p=whisperPages.find(x=>x.id===activePageId);
+  if(p){p.title=v||'Untitled';p.updated=Date.now();}
   const active=document.querySelector('.brew-item.active .brew-item-name');
   if(active)active.textContent=v||'Untitled';
+  clearTimeout(brewSaveTimer);
+  brewSaveTimer=setTimeout(saveBrews,600);
 }
 
 function addWhisperPage(){
