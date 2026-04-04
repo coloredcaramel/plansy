@@ -315,7 +315,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
     <div class="ws-bar">
       <div class="ws-row">
         <button class="ws-btn" id="tab-all" onclick="setWS('all')">All</button>
-        <button class="ws-btn sel-personal" id="tab-personal" onclick="setWS('personal')">Personal</button>
+        <button class="ws-btn sel-personal" id="tab-personal" onclick="setWS('personal')">Me</button>
         <button class="ws-btn" id="tab-cc" onclick="setWS('cc')">CC</button>
         <button class="ws-btn" id="tab-sev" onclick="setWS('sev')">SEV</button>
       </div>
@@ -414,7 +414,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
     <h3 id="m-title">Add task</h3>
     <label>Task name</label><input id="m-name" placeholder="What needs doing?" />
     <label>Workspace</label>
-    <select id="m-ws"><option value="personal">Personal</option><option value="cc">Colored Caramel</option><option value="sev">SEV</option></select>
+    <select id="m-ws"><option value="personal">Me</option><option value="cc">Colored Caramel</option><option value="sev">SEV</option></select>
     <label>Priority</label>
     <select id="m-pri"><option value="high">🔺 High</option><option value="med">🟡 Medium</option><option value="low">🔹 Low</option><option value="todo">To-do</option></select>
     <div class="modal-btns">
@@ -433,7 +433,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
     <h3 id="ev-title">Add event</h3>
     <label>Title</label><input id="ev-name" placeholder="Event name" />
     <label>Workspace</label>
-    <select id="ev-ws"><option value="personal">Personal</option><option value="cc">Colored Caramel</option><option value="sev">SEV</option></select>
+    <select id="ev-ws"><option value="personal">Me</option><option value="cc">Colored Caramel</option><option value="sev">SEV</option></select>
     <label>Day</label><select id="ev-day"></select>
     <div class="two-col">
       <div><label>Start time</label><input type="time" id="ev-start" /></div>
@@ -467,7 +467,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 
 <script>
 // ── CONSTANTS ──
-const WS={personal:{label:'Personal',bg:'#fef0fa',soft:'#f5c8ef',mid:'#d966c0',dark:'#8b3a7e'},cc:{label:'CC',bg:'#fff4e6',soft:'#ffd9a0',mid:'#e8860a',dark:'#7a4400'},sev:{label:'SEV',bg:'#edfaf4',soft:'#b8f0d8',mid:'#1D9E75',dark:'#0F6E56'}};
+const WS={personal:{label:'Me',bg:'#fef0fa',soft:'#f5c8ef',mid:'#d966c0',dark:'#8b3a7e'},cc:{label:'CC',bg:'#fff4e6',soft:'#ffd9a0',mid:'#e8860a',dark:'#7a4400'},sev:{label:'SEV',bg:'#edfaf4',soft:'#b8f0d8',mid:'#1D9E75',dark:'#0F6E56'}};
 const PRI={high:{label:'High',dot:'#e8406a'},med:{label:'Med',dot:'#e8860a'},low:{label:'Low',dot:'#2196a8'},todo:{label:'To-do',dot:'#c4a0d8'},done:{label:'Done',dot:'#e8c8e4'}};
 const COLORS=[{id:'purple',bg:'#fef0fa',border:'#f5c8ef',text:'#8b3a7e',dot:'#d966c0'},{id:'coral',bg:'#fff0eb',border:'#fad4c4',text:'#993C1D',dot:'#D85A30'},{id:'teal',bg:'#edfaf4',border:'#b8f0d8',text:'#0F6E56',dot:'#1D9E75'},{id:'pink',bg:'#fff0f5',border:'#ffb8d0',text:'#8b2040',dot:'#ff6b9d'},{id:'blue',bg:'#e8f8ff',border:'#a8dfff',text:'#005080',dot:'#2196a8'},{id:'amber',bg:'#fff8e0',border:'#ffe090',text:'#7a4400',dot:'#e8a020'},{id:'green',bg:'#eaf3de',border:'#c0dd97',text:'#27500A',dot:'#639922'},{id:'lilac',bg:'#f5f0ff',border:'#d8c8ff',text:'#4a2080',dot:'#9966dd'},{id:'rose',bg:'#fff0f0',border:'#ffc8c8',text:'#801030',dot:'#E24B4A'}];
 const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -484,41 +484,54 @@ let isDragging=false,dragDayIdx=0,dragStartH=0,ghostEl=null,hintEl=null,dragCol=
 let focusTaskId=null,focusSteps=[],focusNotes='',focusPickMode=false,focusDragId=null;
 let emojiPickerEl=null;
 
-// ── BREWS STATE (localStorage only) ──
-let brews=[];
-let activeBrew=null; // id of currently open brew, null = list view
+// ── BREWS STATE (localStorage, per workspace) ──
+// brews is a map: { personal: [...], cc: [...], sev: [...] }
+let brewsMap={personal:[],cc:[],sev:[]};
+let activeBrew=null;
 let brewNid=1;
 let brewSaveTimer=null;
 
+function currentBrews(){return brewsMap[curWS==='all'?'personal':curWS]||[];}
+
 function loadBrews(){
   try{
-    const raw=localStorage.getItem('plansy_brews');
+    const raw=localStorage.getItem('plansy_brews_v2');
     if(raw){
-      brews=JSON.parse(raw);
-      brewNid=Math.max(brewNid,...brews.map(b=>b.id+1));
+      brewsMap=JSON.parse(raw);
+      // ensure all keys exist
+      ['personal','cc','sev'].forEach(k=>{if(!brewsMap[k])brewsMap[k]=[];});
+      const allIds=[...brewsMap.personal,...brewsMap.cc,...brewsMap.sev].map(b=>b.id);
+      if(allIds.length)brewNid=Math.max(brewNid,...allIds)+1;
     } else {
-      brews=[{id:brewNid++,emoji:'🍵',title:'First brew',content:'',updated:Date.now()}];
+      // seed one page per workspace
+      brewsMap={
+        personal:[{id:brewNid++,emoji:'🌸',title:'Personal notes',content:'',updated:Date.now()}],
+        cc:[{id:brewNid++,emoji:'🎨',title:'CC notes',content:'',updated:Date.now()}],
+        sev:[{id:brewNid++,emoji:'💼',title:'SEV notes',content:'',updated:Date.now()}],
+      };
       saveBrews();
     }
   } catch(e){
-    brews=[{id:brewNid++,emoji:'🍵',title:'First brew',content:'',updated:Date.now()}];
+    brewsMap={personal:[],cc:[],sev:[]};
   }
 }
 
 function saveBrews(){
-  try{localStorage.setItem('plansy_brews',JSON.stringify(brews));}
+  try{localStorage.setItem('plansy_brews_v2',JSON.stringify(brewsMap));}
   catch(e){console.warn('brew save fail',e);}
 }
 
 function renderBrews(){
+  const brews=currentBrews();
+  const ws=curWS==='all'?'personal':curWS;
+  const wsLabel=WS[ws];
   const listEl=document.getElementById('brews-list-view');
   const pageEl=document.getElementById('brew-page-view');
   const countEl=document.getElementById('brews-count');
   if(activeBrew===null){
-    // LIST
     listEl.style.display='block';
     pageEl.style.display='none';
-    countEl.textContent=brews.length+' page'+(brews.length!==1?'s':'');
+    countEl.textContent=`${wsLabel.label} · ${brews.length} page${brews.length!==1?'s':''}`;
     listEl.innerHTML=brews.map(b=>`
       <div class="brew-row" onclick="openBrew(${b.id})">
         <span class="brew-row-emoji">${b.emoji}</span>
@@ -533,7 +546,6 @@ function renderBrews(){
         <span style="font-size:18px;line-height:1">+</span> New brew
       </div>`;
   } else {
-    // PAGE
     const b=brews.find(x=>x.id===activeBrew);
     if(!b){activeBrew=null;renderBrews();return;}
     listEl.style.display='none';
@@ -715,8 +727,9 @@ makeResizer('div2','panel-whispers');
 // ── WORKSPACE ──
 function setWS(w){
   curWS=w;
+  activeBrew=null; // go back to list when switching workspace
   ['all','personal','cc','sev'].forEach(x=>{const b=document.getElementById('tab-'+x);if(b)b.className='ws-btn'+(x===w?' sel-'+w:'');});
-  renderSidebar();renderLegend();
+  renderSidebar();renderLegend();renderBrews();
   if(curView==='cal')renderCal();else if(curView==='week')renderWeeklyView();else renderFocusView();
 }
 
