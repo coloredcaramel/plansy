@@ -12,21 +12,17 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
   --txt:#3a1f38;--txt2:#8a5585;--txt3:#c4a0be;
   --red:#E24B4A;--r-pill:999px;--r-sm:10px;--r:14px;
 }
-
-/* ── LAYOUT ── */
 .app{display:flex;height:100vh;overflow:hidden}
 .panel{display:flex;flex-direction:column;overflow:hidden;background:var(--bg);min-width:120px}
-.panel-tasks{border-right:none}
 .panel-whispers{border-left:1.5px solid var(--border);border-right:1.5px solid var(--border)}
 .panel-cal{flex:1;background:var(--bg2)}
-.divider-bar{width:6px;background:var(--bg);border-left:1.5px solid var(--border);border-right:1.5px solid var(--border);cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:10;transition:background .15s}
+.divider-bar{width:6px;background:var(--bg);border-left:1.5px solid var(--border);border-right:1.5px solid var(--border);cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .15s}
 .divider-bar:hover,.divider-bar.dragging{background:var(--p-bg)}
 .divider-bar::after{content:'';display:block;width:3px;height:40px;border-radius:2px;background:var(--border2);transition:background .15s}
 .divider-bar:hover::after,.divider-bar.dragging::after{background:var(--p-mid)}
 
-/* ── TASKS PANEL ── */
+/* SPELLS */
 .tasks-header{padding:12px 14px 10px;display:flex;align-items:center;gap:8px;border-bottom:1.5px solid var(--border);flex-shrink:0}
-.brand-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .brand-name{font-size:15px;font-weight:500;color:var(--txt)}
 .brand-sub{font-size:11px;color:var(--txt3);margin-top:1px}
 .ws-bar{padding:8px 10px;border-bottom:1.5px solid var(--border);flex-shrink:0}
@@ -91,7 +87,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .add-row:hover{background:var(--p-bg);color:var(--p-dark)}
 .add-plus{width:17px;height:17px;border-radius:50%;border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
 .add-row:hover .add-plus{border-color:var(--p-mid);border-style:solid}
-.divider{height:1px;background:var(--border);margin:4px 12px}
+.divider-line{height:1px;background:var(--border);margin:4px 12px}
 .sub-input-row{display:flex;align-items:center;gap:4px;margin-top:3px;padding:1px 0}
 .sub-inline-input{flex:1;padding:3px 7px;font-size:11px;border:1.5px solid var(--p-soft);border-radius:var(--r-pill);background:var(--p-bg);color:var(--txt);outline:none;font-family:inherit}
 .sub-inline-input:focus{border-color:var(--p-mid)}
@@ -108,67 +104,51 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .dump-add-btn{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--p-soft);background:var(--p-bg);color:var(--p-dark);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .dump-add-btn:hover{background:var(--p-soft)}
 
-/* ── BREWS PANEL ── */
+/* BREWS */
 .brews-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.brews-header{padding:14px 18px 10px;border-bottom:1.5px solid var(--border);flex-shrink:0}
-.brews-header-title{font-size:15px;font-weight:500;color:var(--txt);display:flex;align-items:center;gap:8px}
-.brews-header-sub{font-size:11px;color:var(--txt3);margin-top:3px}
-/* LIST VIEW */
-.brews-list-view{flex:1;overflow-y:auto;padding:10px 12px}
-.brews-list-view::-webkit-scrollbar{width:3px}
-.brews-list-view::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-.brew-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);cursor:pointer;transition:background .12s;position:relative;border:1.5px solid transparent;margin-bottom:3px}
-.brew-row:hover{background:var(--p-bg);border-color:var(--p-soft)}
-.brew-row:hover .brew-row-del{opacity:1}
-.brew-row-emoji{font-size:18px;line-height:1;flex-shrink:0}
+.brews-topbar{padding:12px 16px 10px;border-bottom:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;gap:8px}
+.brews-topbar-title{font-size:15px;font-weight:500;color:var(--txt);display:flex;align-items:center;gap:7px;flex:1}
+.brews-topbar-count{font-size:11px;color:var(--txt3)}
+/* list */
+.brews-list{flex:1;overflow-y:auto;padding:10px 12px 16px}
+.brews-list::-webkit-scrollbar{width:3px}
+.brews-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.brew-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r);cursor:pointer;border:1.5px solid var(--border);margin-bottom:6px;background:var(--bg);transition:all .12s}
+.brew-row:hover{border-color:var(--p-soft);background:var(--p-bg)}
+.brew-row-emoji{font-size:20px;line-height:1;flex-shrink:0}
 .brew-row-info{flex:1;min-width:0}
 .brew-row-name{font-size:13px;font-weight:500;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.brew-row-meta{font-size:10px;color:var(--txt3);margin-top:1px}
-.brew-row-del{opacity:0;width:18px;height:18px;border-radius:50%;border:none;background:transparent;color:var(--txt3);cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .12s}
+.brew-row-meta{font-size:10px;color:var(--txt3);margin-top:2px}
+.brew-row-del{width:20px;height:20px;border-radius:50%;border:none;background:transparent;color:var(--txt3);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0;transition:opacity .12s}
+.brew-row:hover .brew-row-del{opacity:1}
 .brew-row-del:hover{background:var(--p-soft);color:var(--p-dark)}
-.brew-add-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);cursor:pointer;color:var(--txt3);font-size:13px;transition:all .12s;border:1.5px dashed var(--border2);margin-top:6px}
-.brew-add-row:hover{background:var(--p-bg);color:var(--p-dark);border-color:var(--p-mid)}
-/* PAGE VIEW */
-.brews-page-view{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.brews-page-topbar{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:1.5px solid var(--border);flex-shrink:0}
-.brew-back-btn{display:flex;align-items:center;gap:5px;padding:5px 11px;font-size:12px;border:1.5px solid var(--border2);border-radius:var(--r-pill);cursor:pointer;background:transparent;color:var(--txt2);font-family:inherit;transition:all .12s}
-.brew-back-btn:hover{background:var(--p-bg);border-color:var(--p-soft);color:var(--p-dark)}
-.brew-saved-badge{font-size:10px;color:var(--txt3);margin-left:auto;display:flex;align-items:center;gap:4px}
-.brews-page-scroll{flex:1;overflow-y:auto;padding:18px 22px}
-.brews-page-scroll::-webkit-scrollbar{width:3px}
-.brews-page-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-.whisper-page-title-row{display:flex;align-items:center;gap:8px;margin-bottom:14px}
-.whisper-emoji-btn{font-size:22px;cursor:pointer;border:none;background:transparent;border-radius:8px;padding:2px 4px;transition:background .12s;line-height:1}
-.whisper-emoji-btn:hover{background:var(--bg3)}
-.whisper-title-input{flex:1;font-size:20px;font-weight:500;color:var(--txt);border:none;background:transparent;outline:none;font-family:inherit;padding:2px 0}
-.whisper-title-input::placeholder{color:var(--txt3)}
-.whisper-toolbar{display:flex;gap:3px;margin-bottom:12px;padding:5px 6px;background:var(--bg3);border-radius:var(--r-sm);flex-wrap:wrap}
-.wtool{padding:3px 8px;font-size:12px;border:none;background:transparent;cursor:pointer;border-radius:6px;color:var(--txt2);font-family:inherit;transition:background .12s;line-height:1.4}
+.brew-add-btn{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r);border:1.5px dashed var(--border2);color:var(--txt3);font-size:13px;cursor:pointer;transition:all .12s;margin-top:2px}
+.brew-add-btn:hover{border-color:var(--p-mid);color:var(--p-dark);background:var(--p-bg)}
+/* page */
+.brew-page{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.brew-page-bar{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:1.5px solid var(--border);flex-shrink:0}
+.brew-back{display:flex;align-items:center;gap:5px;padding:5px 12px;font-size:12px;border:1.5px solid var(--border2);border-radius:var(--r-pill);cursor:pointer;background:transparent;color:var(--txt2);font-family:inherit;transition:all .12s}
+.brew-back:hover{background:var(--p-bg);border-color:var(--p-soft);color:var(--p-dark)}
+.brew-save-status{font-size:10px;color:var(--txt3);margin-left:auto}
+.brew-page-body{flex:1;overflow-y:auto;padding:20px 22px}
+.brew-page-body::-webkit-scrollbar{width:3px}
+.brew-page-body::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.brew-title-row{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.brew-emoji-btn{font-size:24px;cursor:pointer;border:none;background:transparent;border-radius:8px;padding:2px 5px;transition:background .12s;line-height:1;flex-shrink:0}
+.brew-emoji-btn:hover{background:var(--bg3)}
+.brew-title-input{flex:1;font-size:22px;font-weight:500;color:var(--txt);border:none;background:transparent;outline:none;font-family:inherit}
+.brew-title-input::placeholder{color:var(--txt3)}
+.brew-toolbar{display:flex;gap:3px;margin-bottom:12px;padding:5px 6px;background:var(--bg3);border-radius:var(--r-sm);flex-wrap:wrap;flex-shrink:0}
+.wtool{padding:3px 9px;font-size:12px;border:none;background:transparent;cursor:pointer;border-radius:6px;color:var(--txt2);font-family:inherit;line-height:1.4;transition:background .12s}
 .wtool:hover{background:var(--border);color:var(--txt)}
-.whisper-editor{flex:1;min-height:300px;padding:4px 2px;font-size:14px;line-height:1.8;color:var(--txt);outline:none;overflow-y:auto}
-.whisper-editor:empty::before{content:attr(data-placeholder);color:var(--txt3);pointer-events:none}
-.whisper-meta{font-size:10px;color:var(--txt3);margin-top:14px;padding-top:8px;border-top:1px solid var(--border)}
-.emoji-picker{position:fixed;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:8px;display:flex;flex-wrap:wrap;gap:4px;z-index:300;box-shadow:0 4px 20px rgba(0,0,0,.1);max-width:220px}
-.emoji-opt{font-size:20px;cursor:pointer;padding:3px;border-radius:6px;transition:background .1s}
-.emoji-opt:hover{background:var(--bg3)}
-.whisper-page{height:100%;display:flex;flex-direction:column;padding:16px 18px}
-.whisper-page-title-row{display:flex;align-items:center;gap:8px;margin-bottom:14px}
-.whisper-emoji-btn{font-size:22px;cursor:pointer;border:none;background:transparent;border-radius:8px;padding:2px 4px;transition:background .12s;line-height:1}
-.whisper-emoji-btn:hover{background:var(--bg3)}
-.whisper-title-input{flex:1;font-size:17px;font-weight:500;color:var(--txt);border:none;background:transparent;outline:none;font-family:inherit;padding:2px 0}
-.whisper-title-input::placeholder{color:var(--txt3)}
-.whisper-toolbar{display:flex;gap:3px;margin-bottom:10px;padding:5px 6px;background:var(--bg3);border-radius:var(--r-sm);flex-wrap:wrap}
-.wtool{padding:3px 8px;font-size:12px;border:none;background:transparent;cursor:pointer;border-radius:6px;color:var(--txt2);font-family:inherit;transition:background .12s;line-height:1.4}
-.wtool:hover{background:var(--border);color:var(--txt)}
-.wtool.active{background:var(--p-soft);color:var(--p-dark)}
-.whisper-editor{flex:1;min-height:300px;padding:8px 4px;font-size:13.5px;line-height:1.75;color:var(--txt);outline:none;overflow-y:auto}
-.whisper-editor:empty::before{content:attr(data-placeholder);color:var(--txt3);pointer-events:none}
-.whisper-meta{font-size:10px;color:var(--txt3);margin-top:10px;padding-top:6px;border-top:1px solid var(--border)}
-.emoji-picker{position:absolute;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:8px;display:flex;flex-wrap:wrap;gap:4px;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.1);max-width:200px}
+.brew-editor{flex:1;min-height:200px;padding:4px 2px;font-size:14px;line-height:1.8;color:var(--txt);outline:none}
+.brew-editor:empty::before{content:attr(data-placeholder);color:var(--txt3);pointer-events:none}
+.brew-meta{font-size:10px;color:var(--txt3);margin-top:16px;padding-top:8px;border-top:1px solid var(--border)}
+.emoji-picker{position:fixed;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:8px;display:flex;flex-wrap:wrap;gap:4px;z-index:300;box-shadow:0 4px 20px rgba(0,0,0,.12);max-width:220px}
 .emoji-opt{font-size:20px;cursor:pointer;padding:3px;border-radius:6px;transition:background .1s}
 .emoji-opt:hover{background:var(--bg3)}
 
-/* ── CALENDAR PANEL ── */
+/* MOMENTS */
 .cal-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1.5px solid var(--border);background:var(--bg);flex-shrink:0}
 .cal-nav{display:flex;align-items:center;gap:8px}
 .nbtn{background:none;border:1.5px solid var(--border2);border-radius:var(--r-pill);width:28px;height:28px;cursor:pointer;color:var(--txt2);font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .12s}
@@ -296,7 +276,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .focus-done-btn{padding:9px 18px;font-size:12px;border:1.5px solid #b8f0d8;border-radius:var(--r-pill);cursor:pointer;background:#edfaf4;color:#0F6E56;font-family:inherit;font-weight:500}
 .focus-done-btn:hover{background:#b8f0d8}
 
-/* ── MODALS ── */
+/* MODALS */
 .overlay{display:none;position:fixed;inset:0;background:rgba(45,42,64,.28);z-index:200;align-items:center;justify-content:center}
 .overlay.open{display:flex}
 .modal{background:var(--bg);border-radius:16px;padding:22px;width:310px;border:1.5px solid var(--border);max-height:92vh;overflow-y:auto}
@@ -324,10 +304,12 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 
 <div class="app" id="app">
 
-  <!-- SPELLS PANEL -->
-  <div class="panel panel-tasks" id="panel-tasks" style="width:270px">
+  <!-- SPELLS -->
+  <div class="panel" id="panel-tasks" style="width:270px">
     <div class="tasks-header">
-      <div class="brand-icon"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/cat-salem.png" style="width:44px;height:44px;object-fit:contain" onerror="this.outerHTML='🐱'"/></div>
+      <div style="width:44px;height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center">
+        <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/cat-salem.png" style="width:44px;height:44px;object-fit:contain" onerror="this.outerHTML='🐱'"/>
+      </div>
       <div><div class="brand-name">Plansy ✨</div><div class="brand-sub" id="brand-date">–</div></div>
     </div>
     <div class="ws-bar">
@@ -343,25 +325,37 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 
   <div class="divider-bar" id="div1"></div>
 
-  <!-- WHISPERS PANEL -->
-  <div class="panel panel-whispers" id="panel-whispers" style="width:280px">
-    <div class="whispers-header">
-      <div class="whispers-title">
-        <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-star.png" style="width:20px;height:20px;object-fit:contain" onerror="this.outerHTML='🌙'"/>
-        Brews
+  <!-- BREWS -->
+  <div class="panel panel-whispers" id="panel-whispers" style="width:320px">
+    <div class="brews-panel">
+
+      <!-- TOPBAR always visible -->
+      <div class="brews-topbar">
+        <div class="brews-topbar-title">
+          <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-cute-drink.png" style="width:20px;height:20px;object-fit:contain" onerror="this.outerHTML='🍵'"/>
+          Brews
+        </div>
+        <span class="brews-topbar-count" id="brews-count"></span>
       </div>
-      <div style="display:flex;align-items:center;gap:4px">
-        <div class="whispers-tabs" id="whispers-tabs"></div>
-        <button class="wtab-add" onclick="addWhisperPage()" title="New brew">+</button>
+
+      <!-- LIST VIEW -->
+      <div class="brews-list" id="brews-list-view"></div>
+
+      <!-- PAGE VIEW (hidden by default) -->
+      <div class="brew-page" id="brew-page-view" style="display:none">
+        <div class="brew-page-bar">
+          <button class="brew-back" onclick="closeBrew()">← Brews</button>
+          <span class="brew-save-status" id="brew-save-status">✓ saved</span>
+        </div>
+        <div class="brew-page-body" id="brew-page-body"></div>
       </div>
+
     </div>
-    <div class="whispers-tab-line"></div>
-    <div class="whispers-body" id="whispers-body"></div>
   </div>
 
   <div class="divider-bar" id="div2"></div>
 
-  <!-- MOMENTS PANEL -->
+  <!-- MOMENTS -->
   <div class="panel panel-cal" id="panel-cal" style="flex:1;min-width:200px">
     <div class="cal-hdr">
       <div class="cal-nav">
@@ -472,28 +466,185 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 </div>
 
 <script>
+// ── CONSTANTS ──
 const WS={personal:{label:'Personal',bg:'#fef0fa',soft:'#f5c8ef',mid:'#d966c0',dark:'#8b3a7e'},cc:{label:'CC',bg:'#fff4e6',soft:'#ffd9a0',mid:'#e8860a',dark:'#7a4400'},sev:{label:'SEV',bg:'#edfaf4',soft:'#b8f0d8',mid:'#1D9E75',dark:'#0F6E56'}};
 const PRI={high:{label:'High',dot:'#e8406a'},med:{label:'Med',dot:'#e8860a'},low:{label:'Low',dot:'#2196a8'},todo:{label:'To-do',dot:'#c4a0d8'},done:{label:'Done',dot:'#e8c8e4'}};
 const COLORS=[{id:'purple',bg:'#fef0fa',border:'#f5c8ef',text:'#8b3a7e',dot:'#d966c0'},{id:'coral',bg:'#fff0eb',border:'#fad4c4',text:'#993C1D',dot:'#D85A30'},{id:'teal',bg:'#edfaf4',border:'#b8f0d8',text:'#0F6E56',dot:'#1D9E75'},{id:'pink',bg:'#fff0f5',border:'#ffb8d0',text:'#8b2040',dot:'#ff6b9d'},{id:'blue',bg:'#e8f8ff',border:'#a8dfff',text:'#005080',dot:'#2196a8'},{id:'amber',bg:'#fff8e0',border:'#ffe090',text:'#7a4400',dot:'#e8a020'},{id:'green',bg:'#eaf3de',border:'#c0dd97',text:'#27500A',dot:'#639922'},{id:'lilac',bg:'#f5f0ff',border:'#d8c8ff',text:'#4a2080',dot:'#9966dd'},{id:'rose',bg:'#fff0f0',border:'#ffc8c8',text:'#801030',dot:'#E24B4A'}];
 const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const EMOJIS=['🌸','🌙','⭐','🍀','🦋','🌈','🎀','🍓','🌿','💜','🔮','🎵','🌺','🍵','✨','📝','💡','🔥','🌊','🎨','📚','🎯','💫','🌻','🍋','🐱','🌷','🍰','🎪','💎','🫧','🪴','🍄','🌞','🎠'];
 const H_START=5,HH=54;
 const _TODAY=new Date();
 
+// ── STATE ──
 let curWS='personal',wkOff=0,editTaskId=null,editEvId=null,nid=200;
 let repeatSel='none',evColorSel='purple',curView='cal';
 let dumpOpen=true,taskDragId=null,wovDragId=null;
 let isDragging=false,dragDayIdx=0,dragStartH=0,ghostEl=null,hintEl=null,dragCol=null;
 let focusTaskId=null,focusSteps=[],focusNotes='',focusPickMode=false,focusDragId=null;
+let emojiPickerEl=null;
 
-// ── WHISPERS STATE ──
-const PAGE_EMOJIS=['🌸','🌙','⭐','🍀','🦋','🌈','🎀','🍓','🌿','💜','🔮','🎵','🌺','🍵','✨'];
-let whisperPages=[
-  {id:1,emoji:'🍵',title:'First brew',content:'<p>Write anything here…</p>',updated:Date.now()},
-];
-let activePageId=1;
-let wNid=10;
+// ── BREWS STATE (localStorage only) ──
+let brews=[];
+let activeBrew=null; // id of currently open brew, null = list view
+let brewNid=1;
+let brewSaveTimer=null;
 
+function loadBrews(){
+  try{
+    const raw=localStorage.getItem('plansy_brews');
+    if(raw){
+      brews=JSON.parse(raw);
+      brewNid=Math.max(brewNid,...brews.map(b=>b.id+1));
+    } else {
+      brews=[{id:brewNid++,emoji:'🍵',title:'First brew',content:'',updated:Date.now()}];
+      saveBrews();
+    }
+  } catch(e){
+    brews=[{id:brewNid++,emoji:'🍵',title:'First brew',content:'',updated:Date.now()}];
+  }
+}
+
+function saveBrews(){
+  try{localStorage.setItem('plansy_brews',JSON.stringify(brews));}
+  catch(e){console.warn('brew save fail',e);}
+}
+
+function renderBrews(){
+  const listEl=document.getElementById('brews-list-view');
+  const pageEl=document.getElementById('brew-page-view');
+  const countEl=document.getElementById('brews-count');
+  if(activeBrew===null){
+    // LIST
+    listEl.style.display='block';
+    pageEl.style.display='none';
+    countEl.textContent=brews.length+' page'+(brews.length!==1?'s':'');
+    listEl.innerHTML=brews.map(b=>`
+      <div class="brew-row" onclick="openBrew(${b.id})">
+        <span class="brew-row-emoji">${b.emoji}</span>
+        <div class="brew-row-info">
+          <div class="brew-row-name">${b.title||'Untitled'}</div>
+          <div class="brew-row-meta">Edited ${fmtDate(b.updated)}</div>
+        </div>
+        <button class="brew-row-del" onclick="event.stopPropagation();deleteBrew(${b.id})">🗑</button>
+      </div>
+    `).join('')+`
+      <div class="brew-add-btn" onclick="newBrew()">
+        <span style="font-size:18px;line-height:1">+</span> New brew
+      </div>`;
+  } else {
+    // PAGE
+    const b=brews.find(x=>x.id===activeBrew);
+    if(!b){activeBrew=null;renderBrews();return;}
+    listEl.style.display='none';
+    pageEl.style.display='flex';
+    countEl.textContent=b.title||'Untitled';
+    document.getElementById('brew-page-body').innerHTML=`
+      <div class="brew-title-row">
+        <button class="brew-emoji-btn" id="brew-emoji-btn" onclick="toggleBrewEmoji(${b.id})">${b.emoji}</button>
+        <input class="brew-title-input" id="brew-title-input" value="${escHtml(b.title)}" placeholder="Untitled" oninput="onBrewTitleInput(${b.id},this.value)"/>
+      </div>
+      <div class="brew-toolbar">
+        <button class="wtool" onclick="fmt('bold')"><b>B</b></button>
+        <button class="wtool" onclick="fmt('italic')"><i>I</i></button>
+        <button class="wtool" onclick="fmt('underline')"><u>U</u></button>
+        <button class="wtool" onclick="fmt('strikeThrough')">S̶</button>
+        <span style="width:1px;background:var(--border);margin:2px 4px;display:inline-block"></span>
+        <button class="wtool" onclick="fmt('insertUnorderedList')">• list</button>
+        <button class="wtool" onclick="fmt('insertOrderedList')">1. list</button>
+        <span style="width:1px;background:var(--border);margin:2px 4px;display:inline-block"></span>
+        <button class="wtool" onclick="fmt('formatBlock','h2')">H</button>
+        <button class="wtool" onclick="fmt('formatBlock','p')">¶</button>
+      </div>
+      <div class="brew-editor" id="brew-editor" contenteditable="true"
+        data-placeholder="Start brewing your thoughts…"
+        oninput="onBrewContentInput(${b.id})">${b.content||''}</div>
+      <div class="brew-meta">Last edited ${fmtDate(b.updated)}</div>`;
+    setTimeout(()=>{const ed=document.getElementById('brew-editor');if(ed)ed.focus();},40);
+  }
+}
+
+function escHtml(s){return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+
+function openBrew(id){
+  activeBrew=id;
+  renderBrews();
+}
+
+function closeBrew(){
+  activeBrew=null;
+  renderBrews();
+}
+
+function newBrew(){
+  const emoji=EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+  const b={id:brewNid++,emoji,title:'New brew',content:'',updated:Date.now()};
+  brews.push(b);
+  saveBrews();
+  activeBrew=b.id;
+  renderBrews();
+  setTimeout(()=>{const ti=document.getElementById('brew-title-input');if(ti){ti.select();}},60);
+}
+
+function deleteBrew(id){
+  if(brews.length===1){alert('Keep at least one brew 🍵');return;}
+  if(!confirm('Delete this brew?'))return;
+  brews=brews.filter(b=>b.id!==id);
+  saveBrews();
+  renderBrews();
+}
+
+function onBrewTitleInput(id,val){
+  const b=brews.find(x=>x.id===id);
+  if(b){b.title=val||'Untitled';b.updated=Date.now();}
+  document.getElementById('brews-count').textContent=val||'Untitled';
+  scheduleSaveBrews();
+}
+
+function onBrewContentInput(id){
+  const ed=document.getElementById('brew-editor');
+  if(!ed)return;
+  const b=brews.find(x=>x.id===id);
+  if(b){b.content=ed.innerHTML;b.updated=Date.now();}
+  setBadge('saving…');
+  scheduleSaveBrews();
+}
+
+function scheduleSaveBrews(){
+  clearTimeout(brewSaveTimer);
+  brewSaveTimer=setTimeout(()=>{saveBrews();setBadge('✓ saved');},600);
+}
+
+function setBadge(txt){
+  const el=document.getElementById('brew-save-status');
+  if(el)el.textContent=txt;
+}
+
+function fmt(cmd,val){document.execCommand(cmd,false,val||null);}
+
+// emoji picker for brews
+function toggleBrewEmoji(id){
+  if(emojiPickerEl){emojiPickerEl.remove();emojiPickerEl=null;document.removeEventListener('mousedown',closeEmojiOutside);return;}
+  const btn=document.getElementById('brew-emoji-btn');if(!btn)return;
+  const r=btn.getBoundingClientRect();
+  emojiPickerEl=document.createElement('div');
+  emojiPickerEl.className='emoji-picker';
+  emojiPickerEl.style.cssText=`top:${r.bottom+4}px;left:${r.left}px`;
+  emojiPickerEl.innerHTML=EMOJIS.map(e=>`<span class="emoji-opt" data-e="${e}">${e}</span>`).join('');
+  emojiPickerEl.addEventListener('click',ev=>{
+    const e=ev.target.dataset.e;if(!e)return;
+    const b=brews.find(x=>x.id===id);if(b){b.emoji=e;b.updated=Date.now();}
+    saveBrews();
+    emojiPickerEl.remove();emojiPickerEl=null;
+    document.removeEventListener('mousedown',closeEmojiOutside);
+    const btn2=document.getElementById('brew-emoji-btn');if(btn2)btn2.textContent=e;
+  });
+  document.body.appendChild(emojiPickerEl);
+  setTimeout(()=>document.addEventListener('mousedown',closeEmojiOutside),10);
+}
+function closeEmojiOutside(e){if(emojiPickerEl&&!emojiPickerEl.contains(e.target)){emojiPickerEl.remove();emojiPickerEl=null;document.removeEventListener('mousedown',closeEmojiOutside);}}
+
+// ── TASKS DATA ──
 let tasks=[
   {id:1,ws:'personal',pri:'high',name:'Book dentist',done:false,subs:[],ex:false,dayAssign:0},
   {id:2,ws:'personal',pri:'med',name:'Renew gym membership',done:false,subs:[{id:21,name:'Check prices',done:false},{id:22,name:'Find card',done:false}],ex:false,dayAssign:null},
@@ -548,18 +699,18 @@ function getColor(id){return COLORS.find(c=>c.id===id)||COLORS[0];}
 function fmtDate(ts){const d=new Date(ts);return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});}
 
 // ── RESIZABLE PANELS ──
-function makeResizer(dividerId,leftPanelId){
-  const div=document.getElementById(dividerId),left=document.getElementById(leftPanelId);
+function makeResizer(divId,leftId){
+  const div=document.getElementById(divId),left=document.getElementById(leftId);
   let dragging=false,startX=0,startW=0;
   div.addEventListener('mousedown',e=>{dragging=true;startX=e.clientX;startW=left.offsetWidth;div.classList.add('dragging');document.body.style.cursor='col-resize';document.body.style.userSelect='none';e.preventDefault();});
-  document.addEventListener('mousemove',e=>{if(!dragging)return;const w=Math.max(120,startW+(e.clientX-startX));left.style.width=w+'px';left.style.flex='none';});
+  document.addEventListener('mousemove',e=>{if(!dragging)return;left.style.width=Math.max(120,startW+(e.clientX-startX))+'px';left.style.flex='none';});
   document.addEventListener('mouseup',()=>{if(!dragging)return;dragging=false;div.classList.remove('dragging');document.body.style.cursor='';document.body.style.userSelect='';});
 }
 makeResizer('div1','panel-tasks');
 makeResizer('div2','panel-whispers');
 
-// ── BRAND DATE ──
-(function(){const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],dow=_TODAY.getDay(),di=dow===0?6:dow-1;document.getElementById('brand-date').textContent=`${days[di]}, ${months[_TODAY.getMonth()]} ${_TODAY.getDate()}`;})();
+// brand date
+(()=>{const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],dow=_TODAY.getDay(),di=dow===0?6:dow-1;document.getElementById('brand-date').textContent=`${days[di]}, ${months[_TODAY.getMonth()]} ${_TODAY.getDate()}`;})();
 
 // ── WORKSPACE ──
 function setWS(w){
@@ -580,110 +731,7 @@ function switchView(v){
   if(v==='cal')renderCal();else if(v==='week')renderWeeklyView();else renderFocusView();
 }
 
-// ── WHISPERS ──
-function renderWhispers(){
-  const list=document.getElementById('brews-list-scroll');
-  if(list){
-    list.innerHTML=whisperPages.map(p=>`
-      <div class="brew-item${p.id===activePageId?' active':''}" onclick="switchPage(${p.id})">
-        <span class="brew-item-emoji">${p.emoji}</span>
-        <span class="brew-item-name">${p.title||'Untitled'}</span>
-        <button class="brew-del" onclick="event.stopPropagation();deletePage(${p.id})" title="Delete">✕</button>
-      </div>`).join('');
-  }
-  renderPage();
-}
-
-function switchPage(id){
-  // save current editor content first
-  saveCurrentPage();
-  activePageId=id;renderWhispers();
-}
-
-function saveCurrentPage(){
-  const ed=document.getElementById('whisper-editor');
-  const ti=document.getElementById('whisper-title');
-  if(!ed||!ti)return;
-  const p=whisperPages.find(x=>x.id===activePageId);
-  if(p){p.content=ed.innerHTML;p.title=ti.value||'Untitled';p.updated=Date.now();}
-}
-
-function renderPage(){
-  const body=document.getElementById('whispers-body');
-  const p=whisperPages.find(x=>x.id===activePageId);
-  if(!p){body.innerHTML=`<div style="padding:40px;text-align:center;color:var(--txt3);font-size:13px">No page selected</div>`;return;}
-  body.innerHTML=`<div class="whisper-page">
-    <div class="whisper-page-title-row">
-      <button class="whisper-emoji-btn" id="emoji-btn" onclick="toggleEmojiPicker()">${p.emoji}</button>
-      <input class="whisper-title-input" id="whisper-title" value="${p.title}" placeholder="Untitled" oninput="updatePageTitle(this.value)"/>
-    </div>
-    <div class="whisper-toolbar">
-      <button class="wtool" onclick="fmt('bold')" title="Bold"><b>B</b></button>
-      <button class="wtool" onclick="fmt('italic')" title="Italic"><i>I</i></button>
-      <button class="wtool" onclick="fmt('underline')" title="Underline"><u>U</u></button>
-      <button class="wtool" onclick="fmt('strikeThrough')" title="Strike">S̶</button>
-      <span style="width:1px;background:var(--border);margin:2px 3px;display:inline-block"></span>
-      <button class="wtool" onclick="fmt('insertUnorderedList')" title="Bullet list">• list</button>
-      <button class="wtool" onclick="fmt('insertOrderedList')" title="Numbered list">1. list</button>
-      <span style="width:1px;background:var(--border);margin:2px 3px;display:inline-block"></span>
-      <button class="wtool" onclick="fmt('formatBlock','h2')" title="Heading">H</button>
-      <button class="wtool" onclick="fmt('formatBlock','p')" title="Paragraph">¶</button>
-    </div>
-    <div class="whisper-editor" id="whisper-editor" contenteditable="true" data-placeholder="Start brewing your thoughts…" oninput="scheduleBrewSave()">${p.content||''}</div>
-    <div class="whisper-meta">Last edited ${fmtDate(p.updated)}</div>
-  </div>`;
-  // focus editor
-  setTimeout(()=>{const ed=document.getElementById('whisper-editor');if(ed)ed.focus();},30);
-}
-
-function fmt(cmd,val){document.execCommand(cmd,false,val||null);document.getElementById('whisper-editor')?.focus();}
-
-function updatePageTitle(v){
-  const p=whisperPages.find(x=>x.id===activePageId);
-  if(p){p.title=v||'Untitled';p.updated=Date.now();}
-  const active=document.querySelector('.brew-item.active .brew-item-name');
-  if(active)active.textContent=v||'Untitled';
-  clearTimeout(brewSaveTimer);
-  brewSaveTimer=setTimeout(saveBrews,600);
-}
-
-function addWhisperPage(){
-  saveCurrentPage();
-  const emoji=PAGE_EMOJIS[Math.floor(Math.random()*PAGE_EMOJIS.length)];
-  const p={id:wNid++,emoji,title:'New brew',content:'',updated:Date.now()};
-  whisperPages.push(p);activePageId=p.id;renderWhispers();
-  setTimeout(()=>{const ti=document.getElementById('whisper-title');if(ti){ti.select();}},60);
-}
-
-function deletePage(id){
-  if(whisperPages.length===1){alert('Keep at least one page 🌙');return;}
-  whisperPages=whisperPages.filter(p=>p.id!==id);
-  if(activePageId===id)activePageId=whisperPages[0].id;
-  renderWhispers();
-}
-
-// Emoji picker
-const EMOJIS=['🌸','🌙','⭐','🍀','🦋','🌈','🎀','🍓','🌿','💜','🔮','🎵','🌺','🍵','✨','📝','💡','🔥','🌊','🎨','📚','🎯','💫','🌻','🍋','🐱','🌷','🍰','🎪','💎'];
-let emojiPickerEl=null;
-function toggleEmojiPicker(){
-  if(emojiPickerEl){emojiPickerEl.remove();emojiPickerEl=null;return;}
-  const btn=document.getElementById('emoji-btn');
-  emojiPickerEl=document.createElement('div');
-  emojiPickerEl.className='emoji-picker';
-  emojiPickerEl.style.cssText=`top:${btn.getBoundingClientRect().bottom+4}px;left:${btn.getBoundingClientRect().left}px`;
-  emojiPickerEl.innerHTML=EMOJIS.map(e=>`<span class="emoji-opt" onclick="pickEmoji('${e}')">${e}</span>`).join('');
-  document.body.appendChild(emojiPickerEl);
-  setTimeout(()=>document.addEventListener('click',closeEmojiOutside),10);
-}
-function closeEmojiOutside(e){if(emojiPickerEl&&!emojiPickerEl.contains(e.target)){emojiPickerEl.remove();emojiPickerEl=null;document.removeEventListener('click',closeEmojiOutside);}}
-function pickEmoji(e){
-  const p=whisperPages.find(x=>x.id===activePageId);if(p)p.emoji=e;
-  if(emojiPickerEl){emojiPickerEl.remove();emojiPickerEl=null;document.removeEventListener('click',closeEmojiOutside);}
-  const btn=document.getElementById('emoji-btn');if(btn)btn.textContent=e;
-  saveBrews();
-}
-
-// ── SIDEBAR ──
+// ── SIDEBAR (SPELLS) ──
 function renderSidebar(){
   const vis=tasks.filter(t=>curWS==='all'||t.ws===curWS);
   const dates=getWeekDates(wkOff);
@@ -703,15 +751,14 @@ function renderSidebar(){
   DAYS.forEach((day,di)=>{
     const dt=vis.filter(t=>t.dayAssign===di&&!t.done);
     const open=dt.length>0||isToday(dates[di]);
-    html+=`<div class="day-bucket">
-      <div class="day-bucket-head" onclick="toggleBucket(${di})">
-        <div class="day-num-badge${isToday(dates[di])?' today':''}">${dates[di].getDate()}</div>
-        <span class="day-label">${day}</span>
-        ${dt.length?`<span class="day-count">${dt.length}</span>`:''}
-        <span class="day-chevron" id="chev-${di}">${open?'▲':'▼'}</span>
-      </div>
-      <div id="dbody-${di}" style="display:${open?'block':'none'}">
-        <div class="day-bucket-body" data-di="${di}">`;
+    html+=`<div class="day-bucket"><div class="day-bucket-head" onclick="toggleBucket(${di})">
+      <div class="day-num-badge${isToday(dates[di])?' today':''}">${dates[di].getDate()}</div>
+      <span class="day-label">${day}</span>
+      ${dt.length?`<span class="day-count">${dt.length}</span>`:''}
+      <span class="day-chevron" id="chev-${di}">${open?'▲':'▼'}</span>
+    </div>
+    <div id="dbody-${di}" style="display:${open?'block':'none'}">
+      <div class="day-bucket-body" data-di="${di}">`;
     if(dt.length){['high','med','low','todo'].forEach(g=>{const gt=dt.filter(t=>t.pri===g);if(!gt.length)return;html+=`<div class="pri-group"><div class="pri-group-label"><div class="pri-dot" style="background:${PRI[g].dot}"></div>${PRI[g].label}</div>`;gt.forEach(t=>{html+=taskRowHtml(t);});html+=`</div>`;});}
     else html+=`<div class="unsched-hint">Nothing yet</div>`;
     html+=`<div class="add-row" style="margin:2px 0 0;padding:3px 2px" onclick="openAddTask('todo',${di})"><div class="add-plus" style="width:14px;height:14px;font-size:10px">+</div><span style="font-size:11px">add task</span></div>`;
@@ -719,11 +766,10 @@ function renderSidebar(){
   });
   const done=vis.filter(t=>t.done);
   if(done.length){
-    html+=`<div class="divider"></div><div class="unsched-section" style="border-bottom:none">
-      <div class="unsched-head"><span class="unsched-label">
-        <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle" onerror="this.outerHTML='💖'"/>
-        Done <span style="background:var(--bg3);color:var(--txt2);padding:1px 6px;border-radius:999px;font-size:9px">${done.length}</span>
-      </span></div>`;
+    html+=`<div class="divider-line"></div><div class="unsched-section" style="border-bottom:none"><div class="unsched-head"><span class="unsched-label">
+      <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle" onerror="this.outerHTML='💖'"/>
+      Done <span style="background:var(--bg3);color:var(--txt2);padding:1px 6px;border-radius:999px;font-size:9px">${done.length}</span>
+    </span></div>`;
     done.forEach(t=>{html+=taskRowHtml(t);});
     html+=`</div>`;
   }
@@ -762,7 +808,7 @@ function taskRowHtml(t){
 
 function dumpHtml(){
   const items=dump.filter(d=>curWS==='all'||d.ws===curWS);
-  return `<div class="divider"></div>
+  return `<div class="divider-line"></div>
   <div class="unsched-section" style="border-bottom:none">
     <div class="unsched-head" onclick="toggleDump()" style="cursor:pointer">
       <span class="unsched-label">
@@ -771,19 +817,17 @@ function dumpHtml(){
       </span>
       <span style="font-size:9px;color:var(--txt3)">${dumpOpen?'▲':'▼'}</span>
     </div>
-    ${dumpOpen?`<div>
-      ${items.map(d=>`<div class="dump-row">
-        <span class="dump-text">${curWS==='all'?`<span class="ws-badge" style="background:${WS[d.ws].soft};color:${WS[d.ws].dark}">${WS[d.ws].label}</span>`:''}${d.text}</span>
-        <div class="dump-acts">
-          <button class="act" onmousedown="event.stopPropagation();promoteDump(${d.id})">↑</button>
-          <button class="act del" onmousedown="event.stopPropagation();delDump(${d.id})">🗑</button>
-        </div>
-      </div>`).join('')}
-      <div class="dump-input-row">
-        <input class="dump-input" id="dump-input" placeholder="brain dump anything…" onkeydown="if(event.key==='Enter')addDump()"/>
-        <button class="dump-add-btn" onclick="addDump()">+</button>
+    ${dumpOpen?`<div>${items.map(d=>`<div class="dump-row">
+      <span class="dump-text">${curWS==='all'?`<span class="ws-badge" style="background:${WS[d.ws].soft};color:${WS[d.ws].dark}">${WS[d.ws].label}</span>`:''}${d.text}</span>
+      <div class="dump-acts">
+        <button class="act" onmousedown="event.stopPropagation();promoteDump(${d.id})">↑</button>
+        <button class="act del" onmousedown="event.stopPropagation();delDump(${d.id})">🗑</button>
       </div>
-    </div>`:''}
+    </div>`).join('')}
+    <div class="dump-input-row">
+      <input class="dump-input" id="dump-input" placeholder="brain dump anything…" onkeydown="if(event.key==='Enter')addDump()"/>
+      <button class="dump-add-btn" onclick="addDump()">+</button>
+    </div></div>`:''}
   </div>`;
 }
 
@@ -824,44 +868,17 @@ function subKey(e,tid){if(e.key==='Enter')commitSub(tid);if(e.key==='Escape')ren
 function commitSub(tid){const inp=document.getElementById('sub-inp-'+tid);if(!inp)return;const name=inp.value.trim();if(!name)return;const t=tasks.find(x=>x.id===tid);if(!t)return;t.subs.push({id:nid++,name,done:false});t.ex=true;renderSidebar();}
 function delSub(tid,sid){const t=tasks.find(x=>x.id===tid);if(t)t.subs=t.subs.filter(s=>s.id!==sid);renderSidebar();}
 function delTask(id){tasks=tasks.filter(x=>x.id!==id);renderSidebar();if(curView==='week')renderWeeklyView();}
-
-function openAddTask(pri,day){
-  editTaskId=null;window._pd=day!=null?day:null;
-  document.getElementById('m-title').textContent='✨ Add task';
-  document.getElementById('m-name').value='';
-  document.getElementById('m-ws').value=curWS==='all'?'personal':curWS;
-  document.getElementById('m-pri').value=pri==='done'?'todo':pri;
-  document.getElementById('m-delbtn').style.visibility='hidden';
-  document.getElementById('task-overlay').classList.add('open');
-  setTimeout(()=>document.getElementById('m-name').focus(),50);
-}
-function openEditTask(id){
-  const t=tasks.find(x=>x.id===id);if(!t)return;
-  editTaskId=id;window._pd=undefined;
-  document.getElementById('m-title').textContent='✏️ Edit task';
-  document.getElementById('m-name').value=t.name;
-  document.getElementById('m-ws').value=t.ws;
-  document.getElementById('m-pri').value=t.done?'todo':t.pri;
-  document.getElementById('m-delbtn').style.visibility='visible';
-  document.getElementById('task-overlay').classList.add('open');
-  setTimeout(()=>document.getElementById('m-name').focus(),50);
-}
+function openAddTask(pri,day){editTaskId=null;window._pd=day!=null?day:null;document.getElementById('m-title').textContent='✨ Add task';document.getElementById('m-name').value='';document.getElementById('m-ws').value=curWS==='all'?'personal':curWS;document.getElementById('m-pri').value=pri==='done'?'todo':pri;document.getElementById('m-delbtn').style.visibility='hidden';document.getElementById('task-overlay').classList.add('open');setTimeout(()=>document.getElementById('m-name').focus(),50);}
+function openEditTask(id){const t=tasks.find(x=>x.id===id);if(!t)return;editTaskId=id;window._pd=undefined;document.getElementById('m-title').textContent='✏️ Edit task';document.getElementById('m-name').value=t.name;document.getElementById('m-ws').value=t.ws;document.getElementById('m-pri').value=t.done?'todo':t.pri;document.getElementById('m-delbtn').style.visibility='visible';document.getElementById('task-overlay').classList.add('open');setTimeout(()=>document.getElementById('m-name').focus(),50);}
 function closeTaskModal(){document.getElementById('task-overlay').classList.remove('open');editTaskId=null;}
 function deleteEditTask(){tasks=tasks.filter(x=>x.id!==editTaskId);closeTaskModal();renderSidebar();if(curView==='week')renderWeeklyView();}
-function saveTaskModal(){
-  const name=document.getElementById('m-name').value.trim();if(!name)return;
-  const w=document.getElementById('m-ws').value,p=document.getElementById('m-pri').value;
-  if(editTaskId!=null){const t=tasks.find(x=>x.id===editTaskId);if(t){t.name=name;t.ws=w;t.pri=p;t.done=false;}}
-  else tasks.push({id:nid++,ws:w,pri:p,name,done:false,subs:[],ex:false,dayAssign:window._pd??null});
-  window._pd=null;closeTaskModal();renderSidebar();if(curView==='week')renderWeeklyView();
-}
-
+function saveTaskModal(){const name=document.getElementById('m-name').value.trim();if(!name)return;const w=document.getElementById('m-ws').value,p=document.getElementById('m-pri').value;if(editTaskId!=null){const t=tasks.find(x=>x.id===editTaskId);if(t){t.name=name;t.ws=w;t.pri=p;t.done=false;}}else tasks.push({id:nid++,ws:w,pri:p,name,done:false,subs:[],ex:false,dayAssign:window._pd??null});window._pd=null;closeTaskModal();renderSidebar();if(curView==='week')renderWeeklyView();}
 function addDump(){const inp=document.getElementById('dump-input');if(!inp)return;const text=inp.value.trim();if(!text)return;dump.push({id:nid++,ws:curWS==='all'?'personal':curWS,text});inp.value='';renderSidebar();setTimeout(()=>{const i=document.getElementById('dump-input');if(i)i.focus();},50);}
 function delDump(id){dump=dump.filter(x=>x.id!==id);renderSidebar();}
 function promoteDump(id){const d=dump.find(x=>x.id===id);if(!d)return;dump=dump.filter(x=>x.id!==id);editTaskId=null;window._pd=null;document.getElementById('m-title').textContent='✨ Turn into task';document.getElementById('m-name').value=d.text;document.getElementById('m-ws').value=d.ws;document.getElementById('m-pri').value='todo';document.getElementById('m-delbtn').style.visibility='hidden';document.getElementById('task-overlay').classList.add('open');setTimeout(()=>document.getElementById('m-name').focus(),50);renderSidebar();}
 
 // ── EVENT MODAL ──
-function renderSwatches(sel){evColorSel=sel||'purple';document.getElementById('ev-colors').innerHTML=COLORS.map(c=>`<div class="swatch${c.id===evColorSel?' sel':''}" style="background:${c.dot}" title="${c.id}" onclick="pickColor('${c.id}')"></div>`).join('');}
+function renderSwatches(sel){evColorSel=sel||'purple';document.getElementById('ev-colors').innerHTML=COLORS.map(c=>`<div class="swatch${c.id===evColorSel?' sel':''}" style="background:${c.dot}" onclick="pickColor('${c.id}')"></div>`).join('');}
 function pickColor(id){evColorSel=id;renderSwatches(id);}
 function selRepeat(val){repeatSel=val;document.querySelectorAll('.rchip').forEach(c=>c.classList.toggle('sel',c.dataset.r===val));}
 function populateDaySelect(sel){const dates=getWeekDates(wkOff);document.getElementById('ev-day').innerHTML=dates.map((d,i)=>`<option value="${i}">${DAYS[i]} ${d.getDate()}</option>`).join('');document.getElementById('ev-day').value=String(sel||0);}
@@ -885,8 +902,8 @@ function renderCal(){
     const lines=Array.from({length:22-H_START+2},(_,i)=>{const top=i*HH-HH;return `<div class="hline" style="top:${top}px"></div><div class="hline half" style="top:${top+HH/2}px"></div>`;}).join('');
     const evs=ev.map(e=>{const c=getColor(e.color),top=hourToPx(e.sh),h=Math.max(e.dur*HH,22);return `<div class="cevent" style="top:${top}px;height:${h}px;background:${c.bg};color:${c.text};border-color:${c.border}" onclick="openEditEvent(${e.id})"><div>${e.title}</div>${e.dur>=0.5?`<div style="font-size:9px;font-weight:400;opacity:.7">${fmtH(e.sh)} – ${fmtH(e.sh+e.dur)}</div>`:''}${e.repeat&&e.repeat!=='none'?`<div class="repeat-badge">${repeatIcon(e.repeat)}</div>`:''}<button class="ev-del" onclick="event.stopPropagation();quickDelEvent(${e.id})">✕</button></div>`;}).join('');
     const nowH=_TODAY.getHours()+_TODAY.getMinutes()/60;
-    const now=wkOff===0&&isToday(d)?`<div class="now-line" style="top:${hourToPx(nowH)}px"><div class="now-dot"></div></div>`:'';
-    return `<div class="dcol${isToday(d)?' today-col':''}" style="height:${totalH}px">${lines}${evs}${now}</div>`;
+    const nowLine=wkOff===0&&isToday(d)?`<div class="now-line" style="top:${hourToPx(nowH)}px"><div class="now-dot"></div></div>`:'';
+    return `<div class="dcol${isToday(d)?' today-col':''}" style="height:${totalH}px">${lines}${evs}${nowLine}</div>`;
   }).join('');
   syncScroll();attachColEvents();
 }
@@ -915,7 +932,7 @@ function renderWeeklyView(){
   <div class="wov-section-title">This week — drag tasks onto days</div>
   <div class="wov-grid">${dates.map((d,di)=>{const dt=open.filter(t=>t.dayAssign===di);return `<div class="wov-day" id="wov-${di}" ondragover="wovOver(event,${di})" ondragleave="wovLeave(${di})" ondrop="wovDrop(event,${di})"><div class="wov-day-head"><span class="wov-dname">${DAYS[di]}</span><div class="wov-dnum${isToday(d)?' today':''}">${d.getDate()}</div></div><div class="wov-tasks">${dt.map(t=>`<div class="wov-task"><div class="wov-chk${t.done?' done':''}" onclick="wovToggle(${t.id})"></div><div class="wov-pri" style="background:${pc[t.pri]}"></div><span class="wov-tname${t.done?' done':''}">${curWS==='all'?`<span class="ws-badge" style="background:${WS[t.ws].soft};color:${WS[t.ws].dark};font-size:8px">${WS[t.ws].label}</span>`:''}${t.name}</span><button class="wov-del" onclick="wovUnassign(${t.id})">✕</button></div>`).join('')}<div class="wov-drop-hint">drop here</div>${!dt.length?`<div class="wov-empty">empty</div>`:''}</div></div>`;}).join('')}</div>`;
   const unsched=open.filter(t=>t.dayAssign==null);
-  if(unsched.length){html+=`<div class="wov-section-title" style="margin-top:18px">Unscheduled — drag onto a day</div><div class="unsched-pills">${unsched.map(t=>`<div class="unsched-pill" draggable="true" data-id="${t.id}" ondragstart="pillStart(event,${t.id})" ondragend="pillEnd(event)"><div class="pri-pip" style="background:${pc[t.pri]}"></div>${curWS==='all'?`<span class="ws-badge" style="background:${WS[t.ws].soft};color:${WS[t.ws].dark};font-size:9px">${WS[t.ws].label}</span>`:''}${t.name}</div>`).join('')}</div>`;}
+  if(unsched.length){html+=`<div class="wov-section-title" style="margin-top:18px">Unscheduled — drag onto a day</div><div class="unsched-pills">${unsched.map(t=>`<div class="unsched-pill" draggable="true" data-id="${t.id}" ondragstart="pillStart(event,${t.id})" ondragend="pillEnd()"><div class="pri-pip" style="background:${pc[t.pri]}"></div>${curWS==='all'?`<span class="ws-badge" style="background:${WS[t.ws].soft};color:${WS[t.ws].dark};font-size:9px">${WS[t.ws].label}</span>`:''}${t.name}</div>`).join('')}</div>`;}
   document.getElementById('weekly-view').innerHTML=html;
 }
 function pillStart(e,id){wovDragId=id;e.dataTransfer.setData('text/plain',String(id));setTimeout(()=>{const el=e.target;if(el)el.classList.add('dragging');},0);}
@@ -932,8 +949,7 @@ function renderFocusView(){
   const pinned=focusTaskId!=null?tasks.find(x=>x.id===focusTaskId):null;
   if(focusPickMode){
     const available=tasks.filter(t=>!t.done&&(curWS==='all'||t.ws===curWS));const pc={high:'#E24B4A',med:'#BA7517',low:'#185FA5',todo:'#b0acca'};
-    el.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><span style="font-size:14px;font-weight:500;color:var(--txt)">Pick a task to focus on</span><button class="focus-unpin" onclick="focusPickMode=false;renderFocusView()">Cancel</button></div><div class="focus-pick-list">${available.map(t=>{const wc=WS[t.ws];return `<div class="focus-pick-item" onclick="pinFocus(${t.id})"><div class="focus-pick-pri" style="background:${pc[t.pri]||'#ccc'}"></div><span class="focus-pick-name">${t.name}</span><span class="focus-pick-ws" style="background:${wc.soft};color:${wc.dark}">${wc.label}</span></div>`;}).join('')}${!available.length?`<div style="color:var(--txt3);font-size:12px;padding:8px">No open tasks!</div>`:''}</div>`;
-    return;
+    el.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><span style="font-size:14px;font-weight:500;color:var(--txt)">Pick a task to focus on</span><button class="focus-unpin" onclick="focusPickMode=false;renderFocusView()">Cancel</button></div><div class="focus-pick-list">${available.map(t=>{const wc=WS[t.ws];return `<div class="focus-pick-item" onclick="pinFocus(${t.id})"><div class="focus-pick-pri" style="background:${pc[t.pri]||'#ccc'}"></div><span class="focus-pick-name">${t.name}</span><span class="focus-pick-ws" style="background:${wc.soft};color:${wc.dark}">${wc.label}</span></div>`;}).join('')}${!available.length?`<div style="color:var(--txt3);font-size:12px;padding:8px">No open tasks!</div>`:''}</div>`;return;
   }
   if(!pinned){el.innerHTML=`<div class="focus-empty"><div style="font-size:48px;margin-bottom:12px"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-purple-donut.png" style="width:48px;height:48px;object-fit:contain" onerror="this.outerHTML='🍩'"/></div><div class="focus-empty-text">Nothing in focus yet~<br>Pick a task to get started!</div><button class="focus-pick-btn" onclick="focusPickMode=true;renderFocusView()"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:14px;height:14px;object-fit:contain;vertical-align:middle" onerror="this.outerHTML='🌸'"/> Pick a task</button></div>`;return;}
   const wc=WS[pinned.ws];const done=focusSteps.filter(s=>s.done).length;const pct=focusSteps.length?Math.round(done/focusSteps.length*100):0;
@@ -956,30 +972,16 @@ function attachFocusDrag(){
   });
 }
 
-// ── BREWS LOCAL STORAGE ──
-function saveBrews(){
-  try{localStorage.setItem('plansy_brews',JSON.stringify(whisperPages));localStorage.setItem('plansy_brews_active',String(activePageId));}catch(e){console.warn('Brews save error',e);}
-}
-function loadBrews(){
-  try{
-    const raw=localStorage.getItem('plansy_brews');
-    if(raw){whisperPages=JSON.parse(raw);wNid=Math.max(wNid,...whisperPages.map(p=>p.id+1));}
-    const act=localStorage.getItem('plansy_brews_active');
-    if(act&&whisperPages.find(p=>p.id===+act))activePageId=+act;
-    else if(whisperPages.length)activePageId=whisperPages[0].id;
-  }catch(e){console.warn('Brews load error',e);}
-}
+// ── SUPABASE SYNC (tasks/events/dump only) ──
 const SB_URL='https://aryotcmjkjxhfqvsoxej.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeW90Y21qa2p4aGZxdnNveGVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NDY0NDcsImV4cCI6MjA5MDUyMjQ0N30.fOYv72EkmeioE-0wVPNo8KuDudbAZvxV7ONgeGCS8EY';
 const SB_HDR={'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'return=minimal'};
 async function sbGet(table){const r=await fetch(`${SB_URL}/rest/v1/${table}?select=*`,{headers:SB_HDR});return r.ok?await r.json():[];}
 async function sbUpsert(table,rows){if(!rows.length)return;await fetch(`${SB_URL}/rest/v1/${table}`,{method:'POST',headers:{...SB_HDR,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(rows)});}
 async function sbClear(table){await fetch(`${SB_URL}/rest/v1/${table}?id=gte.0`,{method:'DELETE',headers:SB_HDR});}
-
-let saveTimer=null;
-function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveAll,800);}
+let sbSaveTimer=null;
+function scheduleSave(){clearTimeout(sbSaveTimer);sbSaveTimer=setTimeout(saveAll,800);}
 async function saveAll(){
-  saveCurrentPage();
   try{
     await sbClear('tasks');if(tasks.length)await sbUpsert('tasks',tasks.map(t=>({id:t.id,ws:t.ws,pri:t.pri,name:t.name,done:t.done,subs:t.subs,ex:t.ex,day_assign:t.dayAssign??null})));
     await sbClear('cal_events');if(calEvents.length)await sbUpsert('cal_events',calEvents.map(e=>({id:e.id,ws:e.ws,title:e.title,day:e.day,sh:e.sh??null,dur:e.dur??null,allday:e.allday,repeat:e.repeat,color:e.color})));
@@ -994,14 +996,15 @@ async function loadAll(){
     if(d.length){dump=d.map(r=>({id:r.id,ws:r.ws,text:r.text}));nid=Math.max(nid,...dump.map(x=>x.id+1));}
   }catch(e){console.warn('Load error',e);}
 }
-
 const _rSB=renderSidebar;
 renderSidebar=function(){_rSB();scheduleSave();};
 const _rCal=renderCal;
 renderCal=function(){_rCal();scheduleSave();};
 
-document.getElementById('sb-scroll').innerHTML='<div style="padding:24px;text-align:center;color:var(--txt3);font-size:12px">Loading…</div>';
+// ── INIT ──
 loadBrews();
-loadAll().then(()=>{setWS('personal');renderWhispers();});
+renderBrews();
+document.getElementById('sb-scroll').innerHTML='<div style="padding:24px;text-align:center;color:var(--txt3);font-size:12px">Loading…</div>';
+loadAll().then(()=>setWS('personal'));
 </script>
 </html>
