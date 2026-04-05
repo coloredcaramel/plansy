@@ -276,6 +276,41 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
 .focus-done-btn{padding:9px 18px;font-size:12px;border:1.5px solid #b8f0d8;border-radius:var(--r-pill);cursor:pointer;background:#edfaf4;color:#0F6E56;font-family:inherit;font-weight:500}
 .focus-done-btn:hover{background:#b8f0d8}
 
+/* MOODBOARD */
+.moodboard-overlay{display:none;position:fixed;inset:0;background:var(--bg2);z-index:500;flex-direction:column;font-family:'DM Sans',system-ui,sans-serif}
+.moodboard-overlay.open{display:flex}
+.mb-topbar{display:flex;align-items:center;padding:0 24px;height:56px;border-bottom:1.5px solid var(--border);background:var(--bg);flex-shrink:0;gap:20px}
+.mb-logo{font-size:16px;font-weight:500;color:var(--txt);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.mb-nav{display:flex;gap:6px;flex:1;justify-content:center}
+.mb-nav-item{font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;padding:6px 16px;border-radius:var(--r-pill);border:1.5px solid transparent;transition:all .15s}
+.mb-nav-item.active{background:var(--p-bg);color:var(--p-dark);border-color:var(--p-soft)}
+.mb-nav-item:hover:not(.active){background:var(--bg3)}
+.mb-add-img-btn{display:flex;align-items:center;gap:6px;padding:7px 16px;background:var(--p-mid);color:#fff;border:none;border-radius:var(--r-pill);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;transition:background .15s;flex-shrink:0}
+.mb-add-img-btn:hover{background:var(--p-dark)}
+.mb-close-btn{font-size:12px;color:var(--txt2);cursor:pointer;padding:6px 14px;border:1.5px solid var(--border2);border-radius:var(--r-pill);background:transparent;font-family:inherit;transition:all .15s;flex-shrink:0}
+.mb-close-btn:hover{background:var(--p-bg);border-color:var(--p-soft);color:var(--p-dark)}
+.mb-filter-bar{display:flex;align-items:center;gap:6px;padding:10px 24px;flex-shrink:0;border-bottom:1.5px solid var(--border);background:var(--bg);flex-wrap:wrap}
+.mb-filter-count{font-size:11px;color:var(--txt3);margin-right:6px;font-weight:500}
+.mb-pill{padding:5px 14px;border-radius:var(--r-pill);border:1.5px solid var(--border2);font-size:11.5px;font-weight:500;cursor:pointer;background:transparent;color:var(--txt2);font-family:inherit;transition:all .15s}
+.mb-pill:hover{border-color:var(--p-soft);color:var(--p-dark);background:var(--p-bg)}
+.mb-pill.active{background:var(--p-mid);color:#fff;border-color:var(--p-mid)}
+.mb-masonry-wrap{flex:1;overflow-y:auto;padding:18px 20px 32px;background:var(--bg2)}
+.mb-masonry-wrap::-webkit-scrollbar{width:3px}
+.mb-masonry-wrap::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.mb-masonry{columns:5 170px;column-gap:10px}
+.mb-masonry-item{break-inside:avoid;margin-bottom:10px;position:relative;cursor:pointer;border-radius:var(--r);overflow:hidden;border:1.5px solid var(--border)}
+.mb-masonry-item img{width:100%;display:block;border-radius:var(--r)}
+.mb-masonry-item:hover .mb-item-del{display:flex}
+.mb-item-del{display:none;position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.95);border:none;cursor:pointer;font-size:11px;color:var(--red);align-items:center;justify-content:center;box-shadow:0 1px 6px rgba(180,100,160,.2)}
+.mb-file-input{display:none}
+.mb-cat-picker{position:fixed;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:6px;z-index:600;box-shadow:0 4px 20px rgba(180,100,160,.12);min-width:180px}
+.mb-cat-picker-label{font-size:10px;color:var(--txt3);padding:4px 10px 6px;text-transform:uppercase;letter-spacing:.06em;font-weight:500}
+.mb-cat-opt{padding:7px 12px;font-size:12.5px;color:var(--txt);cursor:pointer;border-radius:var(--r-sm);transition:background .1s}
+.mb-cat-opt:hover{background:var(--p-bg);color:var(--p-dark)}
+/* moodboard button */
+.moodboard-btn{display:flex;align-items:center;gap:7px;padding:7px 12px;margin:6px 12px 2px;border-radius:var(--r-sm);cursor:pointer;font-size:12px;font-weight:500;color:var(--cc-dark);background:var(--cc-bg);border:1.5px solid var(--cc-soft);transition:all .12s}
+.moodboard-btn:hover{background:var(--cc-soft)}
+
 /* MODALS */
 .overlay{display:none;position:fixed;inset:0;background:rgba(45,42,64,.28);z-index:200;align-items:center;justify-content:center}
 .overlay.open{display:flex}
@@ -406,6 +441,38 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#fff0fc;height:100vh;
     <div class="wov-wrap" id="weekly-view" style="display:none"></div>
     <div class="focus-wrap" id="focus-view" style="display:none"></div>
   </div>
+</div>
+
+<!-- MOODBOARD OVERLAY -->
+<div class="moodboard-overlay" id="moodboard-overlay">
+  <div class="mb-topbar">
+    <div class="mb-logo">
+      <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/cat-salem.png" style="width:32px;height:32px;object-fit:contain" onerror="this.outerHTML='🐱'"/>
+      Moodboard ✨
+    </div>
+    <div class="mb-nav">
+      <span class="mb-nav-item active">🎨 CC Board</span>
+    </div>
+    <button class="mb-close-btn" onclick="closeMoodboard()">← Plansy</button>
+    <button class="mb-add-img-btn" onclick="mbTriggerUpload(null)">
+      <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:14px;height:14px;object-fit:contain" onerror="this.outerHTML='🌸'"/> Add Image
+    </button>
+  </div>
+  <div class="mb-filter-bar">
+    <span class="mb-filter-count" id="mb-count">0 images</span>
+    <button class="mb-pill active" data-cat="all"      onclick="mbSetFilter('all')">All</button>
+    <button class="mb-pill" data-cat="icons"    onclick="mbSetFilter('icons')">App Icons</button>
+    <button class="mb-pill" data-cat="chars"    onclick="mbSetFilter('chars')">App Characters</button>
+    <button class="mb-pill" data-cat="screens"  onclick="mbSetFilter('screens')">App Screens</button>
+    <button class="mb-pill" data-cat="cards"    onclick="mbSetFilter('cards')">Inspiration Cards</button>
+    <button class="mb-pill" data-cat="coloring" onclick="mbSetFilter('coloring')">Coloring Pages</button>
+  </div>
+  <div class="mb-masonry-wrap" id="mb-masonry-wrap"
+    ondragover="event.preventDefault()"
+    ondrop="mbDropGlobal(event)">
+    <div class="mb-masonry" id="mb-masonry"></div>
+  </div>
+  <input class="mb-file-input" id="mb-file-global" type="file" accept="image/*" multiple onchange="mbFileChange(event,mbAddCategory)"/>
 </div>
 
 <!-- TASK MODAL -->
@@ -541,21 +608,17 @@ function renderBrews(){
         </div>
         <button class="brew-row-del" data-brewdel="${b.id}">🗑</button>
       </div>
-    `).join('')+`<div class="brew-add-btn" id="brew-add-btn">
-        <span style="font-size:18px;line-height:1">+</span> New brew
-      </div>`;
-    // attach events via JS, not inline onclick
+    `).join('');
     listEl.querySelectorAll('.brew-row').forEach(el=>{
       el.addEventListener('click',()=>openBrew(+el.dataset.brewid));
     });
     listEl.querySelectorAll('[data-brewdel]').forEach(el=>{
       el.addEventListener('click',e=>{e.stopPropagation();deleteBrew(+el.dataset.brewdel);});
     });
-    const addBtn=listEl.querySelector('#brew-add-btn');
-    if(addBtn)addBtn.addEventListener('click',newBrew);
+    document.getElementById('brew-add-wrap').style.display='block';
   } else {
     const b=brews.find(x=>x.id===activeBrew);
-    if(!b){activeBrew=null;renderBrews();return;}
+    document.getElementById('brew-add-wrap').style.display='none';
     listEl.style.display='none';
     pageEl.style.display='flex';
     countEl.textContent=b.title||'Untitled';
@@ -757,6 +820,10 @@ function renderSidebar(){
   const vis=tasks.filter(t=>curWS==='all'||t.ws===curWS);
   const dates=getWeekDates(wkOff);
   let html='';
+  // CC-only moodboard button
+  if(curWS==='cc'){
+    html+=`<div class="moodboard-btn" onclick="openMoodboard()">🎨 Moodboard</div>`;
+  }
   const unsched=vis.filter(t=>t.dayAssign==null&&!t.done);
   html+=`<div class="unsched-section">
     <div class="unsched-head">
@@ -995,6 +1062,146 @@ function attachFocusDrag(){
   });
 }
 
+// ── MOODBOARD ──
+const MB_CATS=[
+  {id:'icons',    name:'App Icons'},
+  {id:'chars',    name:'App Characters'},
+  {id:'screens',  name:'App Screens'},
+  {id:'cards',    name:'Inspiration Cards'},
+  {id:'coloring', name:'Coloring Pages'},
+];
+let mbImages={}; // {catId:[{id,src}]}
+let mbFilter='all';
+let mbAddCategory='icons'; // default cat when adding via global button
+
+function loadMoodboard(){
+  try{
+    const raw=localStorage.getItem('plansy_moodboard');
+    if(raw)mbImages=JSON.parse(raw);
+    MB_CATS.forEach(c=>{if(!mbImages[c.id])mbImages[c.id]=[];});
+  }catch(e){MB_CATS.forEach(c=>{mbImages[c.id]=[];});}
+}
+function saveMoodboard(){
+  try{localStorage.setItem('plansy_moodboard',JSON.stringify(mbImages));}catch(e){}
+}
+
+function openMoodboard(){
+  document.getElementById('moodboard-overlay').classList.add('open');
+  mbFilter='all';renderMoodboard();
+}
+function closeMoodboard(){
+  document.getElementById('moodboard-overlay').classList.remove('open');
+}
+
+function mbSetFilter(cat){
+  mbFilter=cat;
+  document.querySelectorAll('.mb-pill').forEach(p=>p.classList.toggle('active',p.dataset.cat===cat));
+  renderMoodboard();
+}
+
+function renderMoodboard(){
+  // collect images to show
+  let items=[];
+  if(mbFilter==='all'){
+    MB_CATS.forEach(c=>(mbImages[c.id]||[]).forEach(img=>items.push({...img,cat:c.id})));
+  } else {
+    (mbImages[mbFilter]||[]).forEach(img=>items.push({...img,cat:mbFilter}));
+  }
+  const total=MB_CATS.reduce((s,c)=>s+(mbImages[c.id]||[]).length,0);
+  document.getElementById('mb-count').textContent=`${total} image${total!==1?'s':''}`;
+
+  const masonry=document.getElementById('mb-masonry');
+  if(!items.length){
+    masonry.innerHTML=`<div style="column-span:all;text-align:center;padding:80px 20px;color:var(--txt3)">
+      <div style="font-size:40px;margin-bottom:14px"><img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/sticker-purple-donut.png" style="width:48px;height:48px;object-fit:contain" onerror="this.outerHTML='🖼'"/></div>
+      <div style="font-size:13px;margin-bottom:6px;color:var(--txt2);font-weight:500">No images yet~</div>
+      <div style="font-size:12px;color:var(--txt3)">Click <b style="color:var(--p-dark)">Add Image</b> or drag images here to get started 🌸</div>
+    </div>`;
+    return;
+  }
+  masonry.innerHTML=items.map(img=>`
+    <div class="mb-masonry-item">
+      <img src="${img.src}" alt="" loading="lazy"/>
+      <button class="mb-item-del" onclick="mbDelImg('${img.cat}','${img.id}')">✕</button>
+    </div>`).join('');
+}
+
+function mbTriggerUpload(cat){
+  // ask which category if 'all' filter active
+  if(cat===null){
+    // show a quick picker
+    mbShowCatPicker();
+    return;
+  }
+  mbAddCategory=cat;
+  document.getElementById('mb-file-global').click();
+}
+
+function mbShowCatPicker(){
+  const existing=document.getElementById('mb-cat-picker');
+  if(existing){existing.remove();return;}
+  const btn=document.querySelector('.mb-add-img-btn');
+  const r=btn.getBoundingClientRect();
+  const picker=document.createElement('div');
+  picker.id='mb-cat-picker';
+  picker.className='mb-cat-picker';
+  picker.style.cssText=`top:${r.bottom+6}px;right:${window.innerWidth-r.right}px`;
+  picker.innerHTML=`<div class="mb-cat-picker-label">Add to category</div>`+
+    MB_CATS.map(c=>`<div class="mb-cat-opt" onclick="mbPickCat('${c.id}')">${c.name}</div>`).join('');
+  document.body.appendChild(picker);
+  setTimeout(()=>document.addEventListener('mousedown',mbClosePicker),10);
+}
+function mbClosePicker(e){
+  const p=document.getElementById('mb-cat-picker');
+  if(p&&!p.contains(e.target)){p.remove();document.removeEventListener('mousedown',mbClosePicker);}
+}
+function mbPickCat(catId){
+  const p=document.getElementById('mb-cat-picker');if(p)p.remove();
+  document.removeEventListener('mousedown',mbClosePicker);
+  mbAddCategory=catId;
+  document.getElementById('mb-file-global').click();
+}
+
+function mbFileChange(e,cat){
+  const files=[...e.target.files];
+  let loaded=0;
+  files.forEach(f=>{
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const catId=typeof cat==='string'?cat:mbAddCategory;
+      if(!mbImages[catId])mbImages[catId]=[];
+      mbImages[catId].push({id:Date.now()+'_'+Math.random().toString(36).slice(2),src:ev.target.result});
+      loaded++;
+      if(loaded===files.length){saveMoodboard();renderMoodboard();}
+    };
+    reader.readAsDataURL(f);
+  });
+  e.target.value='';
+}
+
+function mbDropGlobal(e){
+  e.preventDefault();
+  const files=[...e.dataTransfer.files].filter(f=>f.type.startsWith('image/'));
+  if(!files.length)return;
+  // use current filter cat or default
+  const cat=mbFilter==='all'?'icons':mbFilter;
+  let loaded=0;
+  files.forEach(f=>{
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      mbImages[cat].push({id:Date.now()+'_'+Math.random().toString(36).slice(2),src:ev.target.result});
+      loaded++;
+      if(loaded===files.length){saveMoodboard();renderMoodboard();}
+    };
+    reader.readAsDataURL(f);
+  });
+}
+
+function mbDelImg(catId,imgId){
+  mbImages[catId]=(mbImages[catId]||[]).filter(x=>x.id!==imgId);
+  saveMoodboard();renderMoodboard();
+}
+
 // ── SUPABASE SYNC (tasks/events/dump only) ──
 const SB_URL='https://aryotcmjkjxhfqvsoxej.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeW90Y21qa2p4aGZxdnNveGVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NDY0NDcsImV4cCI6MjA5MDUyMjQ0N30.fOYv72EkmeioE-0wVPNo8KuDudbAZvxV7ONgeGCS8EY';
@@ -1026,6 +1233,8 @@ renderCal=function(){_rCal();scheduleSave();};
 
 // ── INIT ──
 loadBrews();
+loadMoodboard();
+document.getElementById('brew-add-btn').addEventListener('click', newBrew);
 renderBrews();
 document.getElementById('sb-scroll').innerHTML='<div style="padding:24px;text-align:center;color:var(--txt3);font-size:12px">Loading…</div>';
 loadAll().then(()=>setWS('personal'));
