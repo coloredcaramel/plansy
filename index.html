@@ -533,18 +533,26 @@ function renderBrews(){
     pageEl.style.display='none';
     countEl.textContent=`${wsLabel.label} · ${brews.length} page${brews.length!==1?'s':''}`;
     listEl.innerHTML=brews.map(b=>`
-      <div class="brew-row" onclick="openBrew(${b.id})">
+      <div class="brew-row" data-brewid="${b.id}">
         <span class="brew-row-emoji">${b.emoji}</span>
         <div class="brew-row-info">
           <div class="brew-row-name">${b.title||'Untitled'}</div>
           <div class="brew-row-meta">Edited ${fmtDate(b.updated)}</div>
         </div>
-        <button class="brew-row-del" onclick="event.stopPropagation();deleteBrew(${b.id})">🗑</button>
+        <button class="brew-row-del" data-brewdel="${b.id}">🗑</button>
       </div>
-    `).join('')+`
-      <div class="brew-add-btn" onclick="newBrew()">
+    `).join('')+`<div class="brew-add-btn" id="brew-add-btn">
         <span style="font-size:18px;line-height:1">+</span> New brew
       </div>`;
+    // attach events via JS, not inline onclick
+    listEl.querySelectorAll('.brew-row').forEach(el=>{
+      el.addEventListener('click',()=>openBrew(+el.dataset.brewid));
+    });
+    listEl.querySelectorAll('[data-brewdel]').forEach(el=>{
+      el.addEventListener('click',e=>{e.stopPropagation();deleteBrew(+el.dataset.brewdel);});
+    });
+    const addBtn=listEl.querySelector('#brew-add-btn');
+    if(addBtn)addBtn.addEventListener('click',newBrew);
   } else {
     const b=brews.find(x=>x.id===activeBrew);
     if(!b){activeBrew=null;renderBrews();return;}
@@ -780,7 +788,7 @@ function renderSidebar(){
   const done=vis.filter(t=>t.done);
   if(done.length){
     html+=`<div class="divider-line"></div><div class="unsched-section" style="border-bottom:none">
-      <div class="unsched-head" onclick="toggleDone()" style="cursor:pointer"><span class="unsched-label">
+      <div class="unsched-head" onclick="toggleDoneSection()" style="cursor:pointer"><span class="unsched-label">
         <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle" onerror="this.outerHTML='💖'"/>
         Done <span style="background:var(--bg3);color:var(--txt2);padding:1px 6px;border-radius:999px;font-size:9px">${done.length}</span>
       </span><span style="font-size:9px;color:var(--txt3)">${doneOpen?'▲':'▼'}</span></div>`;
@@ -846,7 +854,7 @@ function dumpHtml(){
 }
 
 function toggleBucket(di){const b=document.getElementById('dbody-'+di),c=document.getElementById('chev-'+di);if(!b)return;const open=b.style.display==='block';b.style.display=open?'none':'block';if(c)c.textContent=open?'▼':'▲';}
-function toggleDone(){doneOpen=!doneOpen;renderSidebar();}
+function toggleDoneSection(){doneOpen=!doneOpen;renderSidebar();}
 function toggleDump(){dumpOpen=!dumpOpen;renderSidebar();}
 
 function attachTaskDrag(){
