@@ -479,7 +479,7 @@ const _TODAY=new Date();
 // ── STATE ──
 let curWS='personal',wkOff=0,editTaskId=null,editEvId=null,nid=200;
 let repeatSel='none',evColorSel='purple',curView='cal';
-let dumpOpen=true,taskDragId=null,wovDragId=null;
+let dumpOpen=true,doneOpen=true,taskDragId=null,wovDragId=null;
 let isDragging=false,dragDayIdx=0,dragStartH=0,ghostEl=null,hintEl=null,dragCol=null;
 let focusTaskId=null,focusSteps=[],focusNotes='',focusPickMode=false,focusDragId=null;
 let emojiPickerEl=null;
@@ -779,11 +779,12 @@ function renderSidebar(){
   });
   const done=vis.filter(t=>t.done);
   if(done.length){
-    html+=`<div class="divider-line"></div><div class="unsched-section" style="border-bottom:none"><div class="unsched-head"><span class="unsched-label">
-      <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle" onerror="this.outerHTML='💖'"/>
-      Done <span style="background:var(--bg3);color:var(--txt2);padding:1px 6px;border-radius:999px;font-size:9px">${done.length}</span>
-    </span></div>`;
-    done.forEach(t=>{html+=taskRowHtml(t);});
+    html+=`<div class="divider-line"></div><div class="unsched-section" style="border-bottom:none">
+      <div class="unsched-head" onclick="toggleDone()" style="cursor:pointer"><span class="unsched-label">
+        <img src="https://raw.githubusercontent.com/coloredcaramel/plansy/main/heart-sticker-pink.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle" onerror="this.outerHTML='💖'"/>
+        Done <span style="background:var(--bg3);color:var(--txt2);padding:1px 6px;border-radius:999px;font-size:9px">${done.length}</span>
+      </span><span style="font-size:9px;color:var(--txt3)">${doneOpen?'▲':'▼'}</span></div>`;
+    if(doneOpen)done.forEach(t=>{html+=taskRowHtml(t);});
     html+=`</div>`;
   }
   html+=dumpHtml();
@@ -845,6 +846,7 @@ function dumpHtml(){
 }
 
 function toggleBucket(di){const b=document.getElementById('dbody-'+di),c=document.getElementById('chev-'+di);if(!b)return;const open=b.style.display==='block';b.style.display=open?'none':'block';if(c)c.textContent=open?'▼':'▲';}
+function toggleDone(){doneOpen=!doneOpen;renderSidebar();}
 function toggleDump(){dumpOpen=!dumpOpen;renderSidebar();}
 
 function attachTaskDrag(){
